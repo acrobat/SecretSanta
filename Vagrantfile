@@ -3,16 +3,11 @@
 
 VAGRANTFILE_API_VERSION = "2"
 
-module OS
-    def OS.windows?
-        (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
-    end
-end
-
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-    config.vm.define :secretsanta do |secretsanta_config|
-        secretsanta_config.vm.box = "Intracto/Debian75"
-        secretsanta_config.vm.provider "virtualbox" do |v|
+    config.vm.define :sss do |sss_config|
+        sss_config.vm.box = "Intracto/Debian81"
+
+        sss_config.vm.provider "virtualbox" do |v|
             # show a display for easy debugging
             v.gui = false
 
@@ -24,18 +19,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         end
 
         # allow external connections to the machine
-        #secretsanta_config.vm.network "forwarded_port", guest: 80, host: 8888
+        #sss_config.vm.forward_port 80, 8080
 
-        # Shared folder over NFS unless Windows
-        if OS.windows?
-            secretsanta_config.vm.synced_folder ".", "/vagrant"
-        else
-            secretsanta_config.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['rw', 'vers=3', 'tcp', 'fsc', 'nolock', 'actimeo=2']
-        end
+        # Shared folder over NFS
+        sss_config.vm.synced_folder ".", "/vagrant", type: "nfs", mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=2']
 
-        secretsanta_config.vm.network "private_network", ip: "192.168.33.10"
+        sss_config.vm.network "private_network", ip: "192.168.33.69"
 
         # Shell provisioning
-        secretsanta_config.vm.provision :shell, :path => "shell_provisioner/run.sh"
+        sss_config.vm.provision :shell, :path => "shell_provisioner/run.sh"
     end
 end

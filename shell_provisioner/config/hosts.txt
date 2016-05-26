@@ -1,1 +1,6 @@
-192.168.33.10 dev.secretsantaorganizer.com
+# Add a line to your hosts file.
+# This must match the values for GUEST_IP and APP_DOMAIN set in run.sh
+192.168.33.69 sss.dev.intracto.com www.sss.dev.intracto.com
+192.168.33.69 phpmyadmin.sss.dev.intracto.com
+192.168.33.69 mailcatcher.sss.dev.intracto.com
+192.168.33.69 roundcube.sss.dev.intracto.com
