@@ -50,9 +50,20 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
+        types:
+            uuid_binary: Ramsey\Uuid\Doctrine\UuidBinaryType
+        mapping_types:
+            uuid_binary: uuid_binary
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        mappings:
+            gfx_domain:
+                type: annotation
+                alias: GfxDomain
+                prefix: Intracto\GiftExchangeBundle\Domain
+                dir: "%kernel.root_dir%/../src/Intracto/GiftExchangeBundle/Domain"
 
 # Swiftmailer Configuration
 swiftmailer:
