@@ -22,6 +22,21 @@ class Entity
      */
     private $wishList;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $rank;
+
 
     public function __construct()
     {
@@ -42,5 +57,29 @@ class Entity
     public function getWishList()
     {
         return $this->wishList;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRank()
+    {
+        return $this->rank;
     }
 }

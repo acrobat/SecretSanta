@@ -28,6 +28,46 @@ class Entity
      */
     private $wishList;
 
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $url;
+
+    /**
+     * @ORM\Column(type="string", length=16)
+     */
+    private $ipv4;
+
+    /**
+     * @ORM\Column(type="string", length=48)
+     */
+    private $ipv6;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $participatedAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $participationReminderSentAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $statusChangeReminderSentAt;
+
     public function __construct()
     {
         $this->id = Uuid::uuid4();
@@ -55,5 +95,69 @@ class Entity
     public function getWishList()
     {
         return $this->wishList;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIpv4()
+    {
+        return $this->ipv4;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIpv6()
+    {
+        return $this->ipv6;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getParticipatedAt()
+    {
+        return $this->participatedAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getParticipationReminderSentAt()
+    {
+        return $this->participationReminderSentAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getStatusChangeReminderSentAt()
+    {
+        return $this->statusChangeReminderSentAt;
     }
 }
