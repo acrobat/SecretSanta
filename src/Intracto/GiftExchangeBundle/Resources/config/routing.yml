@@ -1,0 +1,3 @@
+intracto_gift_exchange_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: IntractoGiftExchangeBundle:Default:index }

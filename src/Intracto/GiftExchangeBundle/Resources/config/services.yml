@@ -1,0 +1,7 @@
+parameters:
+#    intracto_gift_exchange.example.class: Intracto\GiftExchangeBundle\Example
+
+services:
+#    intracto_gift_exchange.example:
+#        class: %intracto_gift_exchange.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
