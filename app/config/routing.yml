@@ -1,7 +1,3 @@
-intracto_gift_exchange:
-    resource: "@IntractoGiftExchangeBundle/Resources/config/routing.yml"
-    prefix:   /
-
 intracto_secret_santa:
     resource: "@IntractoSecretSantaBundle/Controller/"
     type:     annotation
