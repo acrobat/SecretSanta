@@ -193,4 +193,32 @@ class Entity
     {
         return $this->reminderSentAt;
     }
+
+    /**
+     * @param Participant $owner
+     * @param string $url
+     * @param string $message
+     * @param \DateTime $eventDate
+     * @param double $maxExpense
+     * @return Entity
+     */
+    static public function create(Participant $owner, $url, $message, $eventDate, $maxExpense)
+    {
+        $pool = new self();
+        $pool->owner = $owner;
+        $pool->url = $url;
+        $pool->message = $message;
+        $pool->eventDate = $eventDate;
+        $pool->maxExpense = $maxExpense;
+
+        $pool->validate();
+
+        return $pool;
+    }
+
+    public function validate()
+    {
+        // Validate this object
+        // Throw exception if not valid
+    }
 }

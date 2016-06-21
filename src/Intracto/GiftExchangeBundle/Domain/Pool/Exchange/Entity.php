@@ -71,4 +71,28 @@ class Entity
     {
         return $this->receiver;
     }
+
+    /**
+     * @param Pool $pool
+     * @param Participant $giver
+     * @param Participant $receiver
+     * @return Entity
+     */
+    static public function create(Pool $pool, Participant $giver, Participant $receiver)
+    {
+        $exchange = new self();
+        $exchange->pool = $pool;
+        $exchange->giver = $giver;
+        $exchange->receiver = $receiver;
+
+        $exchange->validate();
+
+        return $exchange;
+    }
+
+    public function validate()
+    {
+        // Validate this object
+        // Throw exception if not valid
+    }
 }

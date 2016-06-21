@@ -106,4 +106,22 @@ class Entity
     {
         return $this->updatedReminderSentAt;
     }
+
+    /**
+     * @return Entity
+     */
+    static public function create()
+    {
+        $wishList = new self();
+
+        $wishList->validate();
+
+        return $wishList;
+    }
+
+    public function validate()
+    {
+        // Validate this object
+        // Throw exception if not valid
+    }
 }

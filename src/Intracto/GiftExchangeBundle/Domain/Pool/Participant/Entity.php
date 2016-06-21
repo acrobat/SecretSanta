@@ -160,4 +160,35 @@ class Entity
     {
         return $this->statusChangeReminderSentAt;
     }
+
+    /**
+     * @param Pool $pool
+     * @param string $name
+     * @param string $email
+     * @param string $url
+     * @param string $ipv4
+     * @param string $ipv6
+     * @return Entity
+     */
+    static public function create(Pool $pool, $name, $email, $url, $ipv4, $ipv6)
+    {
+        $participant = new self();
+        $participant->pool = $pool;
+        $participant->name = $name;
+        $participant->email = $email;
+        $participant->url = $url;
+        $participant->ipv4 = $ipv4;
+        $participant->ipv6 = $ipv6;
+        $participant->wishList = WishList::create();
+
+        $participant->validate();
+
+        return $participant;
+    }
+
+    public function validate()
+    {
+        // Validate this object
+        // Throw exception if not valid
+    }
 }

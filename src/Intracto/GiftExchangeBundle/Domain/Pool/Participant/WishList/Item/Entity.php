@@ -82,4 +82,30 @@ class Entity
     {
         return $this->rank;
     }
+
+    /**
+     * @param WishList $wishList
+     * @param string $description
+     * @param string $image
+     * @param int $rank
+     * @return Entity
+     */
+    static public function create(WishList $wishList, $description, $image, $rank)
+    {
+        $item = new self();
+        $item->wishList = $wishList;
+        $item->description = $description;
+        $item->image = $image;
+        $item->rank = $rank;
+
+        $item->validate();
+
+        return $item;
+    }
+
+    public function validate()
+    {
+        // Validate this object
+        // Throw exception if not valid
+    }
 }
