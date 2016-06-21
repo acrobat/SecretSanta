@@ -43,7 +43,7 @@ class Entity
      */
     private $updatedReminderSentAt;
 
-    public function __construct()
+    private function __construct()
     {
         $this->id = Uuid::uuid4();
         $this->items = new ArrayCollection();
@@ -113,15 +113,7 @@ class Entity
     static public function create()
     {
         $wishList = new self();
-
-        $wishList->validate();
-
+        
         return $wishList;
-    }
-
-    public function validate()
-    {
-        // Validate this object
-        // Throw exception if not valid
     }
 }

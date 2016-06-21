@@ -79,7 +79,7 @@ class Entity
      */
     private $reminderSentAt;
 
-    public function __construct()
+    private function __construct()
     {
         $this->id = Uuid::uuid4();
         $this->participants = new ArrayCollection();
@@ -201,9 +201,17 @@ class Entity
      * @param \DateTime $eventDate
      * @param double $maxExpense
      * @return Entity
+     * @throws \Exception
      */
-    static public function create(Participant $owner, $url, $message, $eventDate, $maxExpense)
+    static public function create(Participant $owner, $url, $message, \DateTime $eventDate, $maxExpense)
     {
+        if ($url == '') {
+            throw new \Exception('URL must be set.');
+        }
+        if (!is_numeric($maxExpense)) {
+            throw new \Exception('Max Expense must be numeric.');
+        }
+
         $pool = new self();
         $pool->owner = $owner;
         $pool->url = $url;
@@ -211,14 +219,6 @@ class Entity
         $pool->eventDate = $eventDate;
         $pool->maxExpense = $maxExpense;
 
-        $pool->validate();
-
         return $pool;
-    }
-
-    public function validate()
-    {
-        // Validate this object
-        // Throw exception if not valid
     }
 }

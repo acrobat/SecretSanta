@@ -35,7 +35,7 @@ class Entity
      */
     private $receiver;
 
-    public function __construct()
+    private function __construct()
     {
         $this->id = Uuid::uuid4();
     }
@@ -84,15 +84,7 @@ class Entity
         $exchange->pool = $pool;
         $exchange->giver = $giver;
         $exchange->receiver = $receiver;
-
-        $exchange->validate();
-
+        
         return $exchange;
-    }
-
-    public function validate()
-    {
-        // Validate this object
-        // Throw exception if not valid
     }
 }

@@ -68,7 +68,7 @@ class Entity
      */
     private $statusChangeReminderSentAt;
 
-    public function __construct()
+    private function __construct()
     {
         $this->id = Uuid::uuid4();
     }
@@ -169,9 +169,20 @@ class Entity
      * @param string $ipv4
      * @param string $ipv6
      * @return Entity
+     * @throws \Exception
      */
     static public function create(Pool $pool, $name, $email, $url, $ipv4, $ipv6)
     {
+        if ($name == '') {
+            throw new \Exception('Name must be set.');
+        }
+        if ($email == '') {
+            throw new \Exception('Email must be set.');
+        }
+        if ($url == '') {
+            throw new \Exception('Url must be set.');
+        }
+
         $participant = new self();
         $participant->pool = $pool;
         $participant->name = $name;
@@ -181,14 +192,6 @@ class Entity
         $participant->ipv6 = $ipv6;
         $participant->wishList = WishList::create();
 
-        $participant->validate();
-
         return $participant;
-    }
-
-    public function validate()
-    {
-        // Validate this object
-        // Throw exception if not valid
     }
 }

@@ -38,7 +38,7 @@ class Entity
     private $rank;
 
 
-    public function __construct()
+    private function __construct()
     {
         $this->id = Uuid::uuid4();
     }
@@ -89,23 +89,20 @@ class Entity
      * @param string $image
      * @param int $rank
      * @return Entity
+     * @throws \Exception
      */
     static public function create(WishList $wishList, $description, $image, $rank)
     {
+        if ($description == '') {
+            throw new \Exception('Description must be set.');
+        }
+        
         $item = new self();
         $item->wishList = $wishList;
         $item->description = $description;
         $item->image = $image;
         $item->rank = $rank;
 
-        $item->validate();
-
         return $item;
-    }
-
-    public function validate()
-    {
-        // Validate this object
-        // Throw exception if not valid
     }
 }
