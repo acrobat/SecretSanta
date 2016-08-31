@@ -4,7 +4,10 @@
     "type": "project",
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-4": {
+            "Domain\\": "src/Domain/",
+            "Intracto\\": "src/Intracto/"
+        }
     },
     "require": {
         "php": ">=5.4",
