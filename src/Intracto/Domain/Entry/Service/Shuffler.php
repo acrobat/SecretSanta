@@ -1,8 +1,10 @@
 <?php
 
-namespace Domain\Entry\Service;
+namespace Intracto\Domain\Entry\Service;
 
-//TODO
+/**
+ * Class Shuffler.
+ */
 class Shuffler
 {
     const SHUFFLE_TIME_LIMIT = 10; //sec
@@ -40,7 +42,7 @@ class Shuffler
 
                 return $set;
             }
-        };
+        }
 
         return false;
     }
