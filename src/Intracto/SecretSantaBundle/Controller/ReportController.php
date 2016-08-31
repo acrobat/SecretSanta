@@ -3,14 +3,17 @@
 namespace Intracto\SecretSantaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class ReportController.
+ */
 class ReportController extends Controller
 {
     /**
-     * @Route("/report/{year}", defaults={"year" = "all"}, name="report")
-     * @Template()
+     * @param $year
+     *
+     * @return array
      */
     public function reportAction($year)
     {
@@ -33,7 +36,7 @@ class ReportController extends Controller
                 $data['difference_data_pool'] = $cache['difference_data_pool'];
             }
 
-            return $data;
+            return new Response($data);
         }
 
         try {

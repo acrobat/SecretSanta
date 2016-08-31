@@ -20,8 +20,14 @@ intracto.secretsanta.entry.remove_entry_from_pool:
 
 intracto.secretsanta.static.privacypolicy:
     path:     /privacy-policy
-    defaults: { _controller: IntractoSecretSantaBundle:Static:privacyPolicyAction }
+    defaults: { _controller: IntractoSecretSantaBundle:Static:privacyPolicy }
 
 intracto.secretsanta.static.faq:
     path:     /faq
-    defaults: { _controller: IntractoSecretSantaBundle:Static:faqAction }
+    defaults: { _controller: IntractoSecretSantaBundle:Static:faq }
+
+intracto.secretsanta.report.report:
+    path:     /report/{year}
+    defaults:
+        _controller: IntractoSecretSantaBundle:Report:report
+        year: "all"
