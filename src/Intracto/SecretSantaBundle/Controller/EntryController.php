@@ -87,12 +87,12 @@ class EntryController extends Controller
 
                     if (!$inOrder) {
                         // redirect to force refresh of form and entity
-                        return $this->redirect($this->generateUrl('entry_view', ['url' => $url]));
+                        return $this->redirect($this->generateUrl('intracto.secretsanta.entry.index', ['url' => $url]));
                     }
 
                     if ($legacyWishlist && ($entry->getWishlist() === null || $entry->getWishlist() === '')) {
                         // started out with legacy, wishlist is empty now, reload page to switch to new wishlist
-                        return $this->redirect($this->generateUrl('entry_view', ['url' => $url]));
+                        return $this->redirect($this->generateUrl('intracto.secretsanta.entry.index', ['url' => $url]));
                     }
                 }
 
@@ -189,7 +189,7 @@ class EntryController extends Controller
             $this->translator->trans('flashes.entry.poke_buddy')
         );
 
-        return $this->redirect($this->generateUrl('entry_view', ['url' => $url]));
+        return $this->redirect($this->generateUrl('intracto.secretsanta.entry.index', ['url' => $url]));
 
         return $this->render();
     }

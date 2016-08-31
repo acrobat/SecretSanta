@@ -1,3 +1,19 @@
-intracto_test_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: IntractoTestBundle:Default:index }
+intracto.secretsanta.entry.index:
+    path:     /entry/{url}
+    defaults: { _controller: IntractoTestBundle:Entry:index }
+
+intracto.secretsanta.entry.edit_email:
+    path:     /entry/edit-email/{listUrl}/{entryId}
+    defaults: { _controller: IntractoTestBundle:Entry:editEmail }
+
+intracto.secretsanta.entry.dump_entries:
+    path:     /dump-entries
+    defaults: { _controller: IntractoTestBundle:Entry:dumpEntries }
+
+intracto.secretsanta.entry.poke_buddy:
+    path:     /poke/{url}/{entryId}
+    defaults: { _controller: IntractoTestBundle:Entry:pokeBuddy }
+
+intracto.secretsanta.entry.remove_entry_from_pool:
+    path:     /entry/remove/{listUrl}/{entryId}
+    defaults: { _controller: IntractoTestBundle:Entry:removeEntryFromPool }

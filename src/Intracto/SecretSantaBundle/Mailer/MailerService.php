@@ -229,7 +229,7 @@ class MailerService
     {
         $this->translator->setLocale($entry->getPool()->getLocale());
         $this->mailer->send(\Swift_Message::newInstance()
-            ->setSubject($this->translator->trans('emails.poke_buddy.subject'))
+            ->setSubject($this->translator->trans('emails.intracto.secretsanta.entry.intracto.secretsanta.entry.poke_buddy.subject'))
             ->setFrom($this->adminEmail, $this->translator->trans('emails.sender'))
             ->setTo($entry->getEmail(), $entry->getName())
             ->setBody(

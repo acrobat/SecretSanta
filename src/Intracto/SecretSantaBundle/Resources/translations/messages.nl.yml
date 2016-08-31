@@ -392,7 +392,7 @@ emails:
                 Je hebt een overzicht van alle koppelingen in je mailinglijst aangevraagd. Let op: Alle leden kunnen dit zien op hun verlanglijst pagina.
 
                 Hier volgt het overzicht van welke leden een cadeau zouden moeten voorzien voor welke leden.
-    poke_buddy:
+    intracto.secretsanta.entry.intracto.secretsanta.entry.poke_buddy:
         subject: Je maatje wacht op jouw verlanglijstje
         message:
             html: >
@@ -508,7 +508,7 @@ flashes:
         resent: <strong>Opnieuw verstuurd!</strong><br/>De e-mail aan %email% werd opnieuw verstuurd.<br/>
     entry:
         wishlist_updated: <h4>Verlanglijst geüpdatet</h4>We hebben onze kaboutertjes op pad gestuurd om jouw Secret Santa te vertellen op welke cadeau's je vurig hoopt!
-        poke_buddy: <h4>Gepord</h4> Onze kabourtjes zijn onderweg naar jouw Secret Santa om te vragen naar interessante spulletjes voor op hun verlanglijstje.
+        intracto.secretsanta.entry.intracto.secretsanta.entry.poke_buddy: <h4>Gepord</h4> Onze kabourtjes zijn onderweg naar jouw Secret Santa om te vragen naar interessante spulletjes voor op hun verlanglijstje.
         edit_email: <h4>Niet bewaard</h4> Er is wat fout met het e-mailadres.
         saved_email: <h4>Bewaard</h4> Het nieuwe e-mailadres werd bewaard. We hebben ook de e-mail opnieuw verstuurd.
     forgot_manage_link:

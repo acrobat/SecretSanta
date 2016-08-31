@@ -47,7 +47,7 @@
                             </a>
                         {% endspaceless %}
                         {% if app.environment == 'dev' %}
-                            <a href="{{ path('entry_view', { 'url': entry.url }) }}" class="add-participant-link">
+                            <a href="{{ path('intracto.secretsanta.entry.index', { 'url': entry.url }) }}" class="add-participant-link">
                                 <img src="{{ asset('bundles/intractosecretsanta/img/view.png') }}" rel="tooltip"
                                      title="{{ entry.entry.name }} <{{ entry.entry.email }}>"
                                      alt="{{ 'manage.view_entry'|trans }}">
@@ -317,7 +317,7 @@
 
         function editableEmail(listUrl, entryId) {
             var email = $('#email_' + entryId).html();
-            var url = '{{ path("entry_email_edit", { 'listUrl': 'listUrl', 'entryId': 'entryId' }) }}';
+            var url = '{{ path("intracto.secretsanta.entry.edit_email", { 'listUrl': 'listUrl', 'entryId': 'entryId' }) }}';
             url = url.replace("listUrl", listUrl);
             url = url.replace("entryId", entryId);
             $('#email_' + entryId).html(

@@ -409,7 +409,7 @@ emails:
                 You have requested all matches in your mailing list. Please be aware that all the members will be able to see this on their wishlist page.
 
                 Following is an overview of which members are supposed to get gifts for which users.
-    poke_buddy:
+    intracto.secretsanta.entry.intracto.secretsanta.entry.poke_buddy:
         subject: Your buddy is waiting for your wishlist
         message:
             html: >
@@ -525,7 +525,7 @@ flashes:
         resent: <strong>Resent!</strong><br/>The e-mail to %email% has been resent.<br/>
     entry:
         wishlist_updated: <h4>Wishlist updated</h4>We've sent out our gnomes to notify your Secret Santa about your wishes!
-        poke_buddy: <h4>Poked</h4> We've sent out our gnomes to ask your Secret Santa to add items to the wishlist!
+        intracto.secretsanta.entry.intracto.secretsanta.entry.poke_buddy: <h4>Poked</h4> We've sent out our gnomes to ask your Secret Santa to add items to the wishlist!
         edit_email: <h4>Not saved</h4> There is an error in the email address.
         saved_email: <h4>Saved</h4> The new email address was saved. We also resent the e-mail.
     analytics:
