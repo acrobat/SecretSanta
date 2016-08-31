@@ -3,7 +3,7 @@
 namespace Intracto\Domain\Entry\Service;
 
 /**
- * Class Shuffler
+ * Class Shuffler.
  */
 class Shuffler
 {
@@ -42,7 +42,7 @@ class Shuffler
 
                 return $set;
             }
-        };
+        }
 
         return false;
     }

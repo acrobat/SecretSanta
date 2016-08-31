@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use Intracto\SecretSantaBundle\Entity\Entry;
 
 /**
- * Class EntryRepository
+ * Class EntryRepository.
  */
 class EntryRepository extends EntityRepository
 {
