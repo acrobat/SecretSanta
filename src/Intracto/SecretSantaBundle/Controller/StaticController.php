@@ -11,18 +11,18 @@ use Symfony\Component\HttpFoundation\Response;
 class StaticController extends Controller
 {
     /**
-     * @return array
+     * @return Response
      */
     public function privacyPolicyAction()
     {
-        return new Response([]);
+        return $this->render('IntractoSecretSantaBundle:Static:privacyPolicy.html.twig');
     }
 
     /**
-     * @return array
+     * @return Response
      */
     public function faqAction()
     {
-        return new Response([]);
+        return $this->render('IntractoSecretSantaBundle:Static:faq.html.twig');
     }
 }

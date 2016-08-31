@@ -1,3 +1,9 @@
 intracto_secret_santa:
     resource: "@IntractoSecretSantaBundle/Resources/config/routing.yml"
     prefix:   /
+
+intracto_secret_santa+pool:
+    resource: "@IntractoSecretSantaBundle/Controller/PoolController.php"
+    prefix:   /
+    type:     annotation
+

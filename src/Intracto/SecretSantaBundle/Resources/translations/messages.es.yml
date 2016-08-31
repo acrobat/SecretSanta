@@ -283,7 +283,7 @@ emails:
                 Has solicitado todas las atribuciones en tu lista de deseos. Por favor, ten en cuenta que todos los miembros podrán ver eso en su página de la lista de deseos.
 
                 A continuación un resumen de qué miembros se supone que van a recibir regalos y de parte de qué usuarios.
-    intracto.secretsanta.entry.intracto.secretsanta.entry.poke_buddy:
+    intracto.secretsanta.entry.poke_buddy:
         subject: Tu amigote est&aacute; esperando tu lista de deseos
         message:
             html: >
@@ -399,7 +399,7 @@ flashes:
         resent: <strong>¡Reenviado!</strong><br/>El correo electrónico %email% ha sido reenviado.<br/>
     entry:
         wishlist_updated: <h4>Lista de deseos actualizada</h4>¡Hemos enviado a nuestros gnomos para que notifiquen a tu Secret Santa tus deseos!
-        intracto.secretsanta.entry.intracto.secretsanta.entry.poke_buddy: <h4>Empujado</h4> Nuestros gnomos est&aacute;n de camino para avisar tu amigote Secret Santa que su lista de deseos est&aacute; vac&iacute;a.
+        intracto.secretsanta.entry.poke_buddy: <h4>Empujado</h4> Nuestros gnomos est&aacute;n de camino para avisar tu amigote Secret Santa que su lista de deseos est&aacute; vac&iacute;a.
         edit_email: <h4>No guardado</h4> Hay un error en la dirección de correo electrónico.
         saved_email: <h4>Guardado</h4> Se guardó la nueva dirección de correo electrónico. También reenviamos el correo electrónico.
     analytics:
