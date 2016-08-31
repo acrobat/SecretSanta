@@ -20,7 +20,7 @@ parameters:
               - js
         git_commit_message:
             matchers:
-                - /\[([0-9]+)\] (.+)/
+                - /(.+)/
             case_insensitive: true
             multiline: true
         phpcs:
