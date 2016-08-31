@@ -7,6 +7,7 @@ CONFIG_PATH='/vagrant/shell_provisioner/config'
 
 DEPENDENCIES=(
     debian
+    bash
     tools
     vim
     php
