@@ -1,12 +1,18 @@
 <?php
 
-namespace Domain\Entry;
+namespace Intracto\Domain\Entry;
 
 use Doctrine\ORM\EntityRepository;
+use Intracto\SecretSantaBundle\Entity\Entry;
 
+/**
+ * Class EntryRepository
+ */
 class EntryRepository extends EntityRepository
 {
     /**
+     * @param \DateTime $startDate
+     *
      * @return Entry[]
      */
     public function findAfter(\DateTime $startDate)
