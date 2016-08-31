@@ -6,6 +6,7 @@ use Intracto\SecretSantaBundle\Entity\Entry;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class EntryController.
@@ -21,7 +22,10 @@ class EntryController extends Controller
     public function indexAction(Request $request, $url)
     {
         /** @var Entry $entry */
-        $entry = $this->getDoctrine()->getRepository('Entry')->findOneBy(['url' => $url]);
+        $entry = $this->getDoctrine()->getRepository('IntractoSecretSantaBundle:Entry')->findOneBy(['url' => $url]);
+        if (!$entry instanceof Entry) {
+            throw new NotFoundHttpException();
+        }
 
         if ($entry->getWishlist() !== null && $entry->getWishlist() != '') {
             $legacyWishlist = true;
