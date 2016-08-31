@@ -3,14 +3,14 @@
 namespace Intracto\SecretSantaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+/**
+ * Class StaticController.
+ */
 class StaticController extends Controller
 {
     /**
-     * @Route("/privacy-policy", name="privacypolicy")
-     * @Template()
+     * @return array
      */
     public function privacyPolicyAction()
     {
@@ -18,8 +18,7 @@ class StaticController extends Controller
     }
 
     /**
-     * @Route("/faq", name="faq")
-     * @Template()
+     * @return array
      */
     public function faqAction()
     {
