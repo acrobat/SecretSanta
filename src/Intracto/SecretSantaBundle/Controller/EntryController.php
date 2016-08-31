@@ -3,6 +3,8 @@
 namespace Intracto\SecretSantaBundle\Controller;
 
 use Intracto\SecretSantaBundle\Entity\Entry;
+use Intracto\SecretSantaBundle\Form\WishlistNewType;
+use Intracto\SecretSantaBundle\Form\WishlistType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -113,15 +115,13 @@ class EntryController extends Controller
         $oneWeekFromEventDate = date('Y-m-d', strtotime($eventDate.'- 1 week'));
 
         if (!$request->isXmlHttpRequest()) {
-            return [
+            return $this->render('IntractoSecretSantaBundle:Entry:index.html.twig', [
                 'entry' => $entry,
                 'form' => $form->createView(),
                 'secret_santa' => $secretSanta,
                 'oneWeekFromEventDate' => $oneWeekFromEventDate,
-            ];
+            ]);
         }
-
-        return $this->render();
     }
 
     /**

@@ -364,7 +364,7 @@ emails:
                 Vous avez demand&eacute; à conna&icirc;tre toutes les attributions de votre liste. Sachez que chaque membre en sera inform&eacute; sur sa liste de souhaits.
 
                 Ci-dessous, la liste des membres et leurs copains cadeaux.
-    intracto.secretsanta.entry.intracto.secretsanta.entry.poke_buddy:
+    intracto.secretsanta.entry.poke_buddy:
         subject: Votre copain est en attente de votre liste de souhaits
         message:
             html: >
@@ -477,7 +477,7 @@ flashes:
         resent: <strong>Renvoyé !</strong><br/>L'e-mail à %email% a bien été renvoyé.<br/>
     entry:
         wishlist_updated: <h4>Liste de souhaits mise à jour</h4>Nous avons envoyé nos gnomes afin qu'ils avertissent votre Père-Noël secret de vos souhaits !
-        intracto.secretsanta.entry.intracto.secretsanta.entry.poke_buddy: <h4>Stimulé</h4> Nos gnomes sont en route pour avertir votre copain Secret Santa que leur liste de souhaits est vide.
+        intracto.secretsanta.entry.poke_buddy: <h4>Stimulé</h4> Nos gnomes sont en route pour avertir votre copain Secret Santa que leur liste de souhaits est vide.
         edit_email: <h4>Non enregistrée</h4> Il y a une erreur dans l'adresse e-mail.
         saved_email: <h4>Enregistrée</h4> La nouvelle adresse e-mail a été enregistrée. Nous avons également renvoyé l'e-mail.
     pool_update:
