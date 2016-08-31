@@ -19,7 +19,6 @@ class AppKernel extends Kernel
             new Intracto\SecretSantaBundle\IntractoSecretSantaBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
-            new JMS\TranslationBundle\JMSTranslationBundle(),
             new Intracto\GiftExchangeBundle\IntractoGiftExchangeBundle(),
         );
 
