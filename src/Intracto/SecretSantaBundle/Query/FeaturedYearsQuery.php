@@ -4,6 +4,9 @@ namespace Intracto\SecretSantaBundle\Query;
 
 use Doctrine\DBAL\Connection;
 
+/**
+ * Class FeaturedYearsQuery.
+ */
 class FeaturedYearsQuery
 {
     /** @var Connection */
@@ -24,7 +27,7 @@ class FeaturedYearsQuery
     {
         $query = $this->dbal->createQueryBuilder()
             ->select('distinct(year(p.sentdate)) AS featured_year')
-            ->from('Pool', 'p')
+            ->from('pool', 'p')
             ->where('year(p.sentdate) IS NOT NULL')
             ->orderBy('year(p.sentdate)', 'DESC');
 

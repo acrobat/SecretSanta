@@ -11,9 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 class ReportController extends Controller
 {
     /**
-     * @param $year
+     * @param int $year
      *
-     * @return array
+     * @return Response
      */
     public function reportAction($year)
     {
@@ -36,7 +36,7 @@ class ReportController extends Controller
                 $data['difference_data_pool'] = $cache['difference_data_pool'];
             }
 
-            return new Response($data);
+            return $this->render('IntractoSecretSantaBundle:Report:report.html.twig', $data);
         }
 
         try {
@@ -84,11 +84,11 @@ class ReportController extends Controller
         if ($year == 'all' || $year == $featuredYears['featured_years'][$lastKey]) {
             $this->get('cache')->save('data'.$year, serialize($data), 24 * 60 * 60);
 
-            return $data;
+            return $this->render('IntractoSecretSantaBundle:Report:report.html.twig', $data);
         }
 
         $this->get('cache')->save('data'.$year, serialize($data));
 
-        return $data;
+        return $this->render('IntractoSecretSantaBundle:Report:report.html.twig', $data);
     }
 }
