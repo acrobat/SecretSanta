@@ -1,12 +1,32 @@
 parameters:
-    bin_dir: "./bin/vendor"
-    git_dir: "."
-    stop_on_failure: false
-    ignore_unstaged_commits: false
+    git_dir: .
+    bin_dir: ./bin
     tasks:
+        git_blacklist:
+            keywords:
+                # PHP
+                - "die("
+                - "var_dump("
+                - "print_r("
+                - "print("
+                - "dump("
+                - "debug_backtrace("
+                - "exit;"
+                - "echo "
+                # JS
+                - "console.log("
+            triggered_by:
+              - php
+              - js
         git_commit_message:
             matchers:
-                - /#([0-9]*)/
+                - /\[([0-9]+)\] (.+)/
             case_insensitive: true
+            multiline: true
+        phpcs:
+            standard: ./vendor/escapestudios/symfony2-coding-standard/Symfony2/
         phpcsfixer:
             level: symfony
+        securitychecker:
+            lockfile: ./composer.lock
+            run_always: false
