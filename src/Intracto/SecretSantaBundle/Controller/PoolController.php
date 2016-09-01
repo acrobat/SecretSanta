@@ -30,20 +30,16 @@ class PoolController extends Controller
      */
     private $entry;
 
-    /**
-     * @Route("/", name="pool_create")
-     * @Template()
-     */
+
     public function createAction(Request $request)
     {
         $pool = new Pool();
-
-        return $this->handlePoolCreation($request, $pool);
+        return $this->render('IntractoSecretSantaBundle:Pool:create.html.twig', $this->handlePoolCreation($request, $pool));
     }
 
     /**
      * @param Request $request
-     * @param Pool    $pool
+     * @param Pool $pool
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -88,15 +84,17 @@ class PoolController extends Controller
     }
 
     /**
-     * @Route("/reuse/{listUrl}", name="pool_reuse")
-     * @Template("IntractoSecretSantaBundle:Pool:create.html.twig")
+     * @param Request $request
+     * @param string $listUrl
+     *
+     * @return Response
      */
     public function reuseAction(Request $request, $listUrl)
     {
         $this->getPool($listUrl);
         $pool = $this->pool->createNewPoolForReuse();
 
-        return $this->handlePoolCreation($request, $pool);
+        return $this->render("IntractoSecretSantaBundle:Pool:create.html.twig", $this->handlePoolCreation($request, $pool));
     }
 
     /**
@@ -122,8 +120,9 @@ class PoolController extends Controller
     }
 
     /**
-     * @Route("/exclude/{listUrl}", name="pool_exclude")
-     * @Template()
+     * @param Request $request
+     * @param $listUrl
+     * @return Response|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function excludeAction(Request $request, $listUrl)
     {
@@ -134,7 +133,7 @@ class PoolController extends Controller
                 PoolEvents::NEW_POOL_CREATED,
                 new PoolEvent($this->pool)
             );
-            
+
             return $this->redirect($this->generateUrl('pool_created', ['listUrl' => $this->pool->getListurl()]));
         }
 
@@ -174,16 +173,12 @@ class PoolController extends Controller
             }
         }
 
-        return [
+        return $this->render('IntractoSecretSantaBundle:Pool:exclude.html.twig', [
             'form' => $form->createView(),
             'pool' => $this->pool,
-        ];
+        ]);
     }
 
-    /**
-     * @Route("/created/{listUrl}", name="pool_created")
-     * @Template()
-     */
     public function createdAction($listUrl)
     {
         $this->getPool($listUrl);
@@ -191,15 +186,11 @@ class PoolController extends Controller
             return $this->redirect($this->generateUrl('pool_exclude', ['listUrl' => $this->pool->getListurl()]));
         }
 
-        return [
+        return $this->render('IntractoSecretSantaBundle:Pool:created.html.twig', [
             'pool' => $this->pool,
-        ];
+        ]);
     }
 
-    /**
-     * @Route("/manage/{listUrl}", name="pool_manage")
-     * @Template()
-     */
     public function manageAction(Request $request, $listUrl)
     {
         $this->getPool($listUrl);
@@ -217,7 +208,7 @@ class PoolController extends Controller
         }
 
         $eventDate = date_format($this->pool->getEventdate(), 'Y-m-d');
-        $oneWeekFromEventDate = date('Y-m-d', strtotime($eventDate.'- 1 week'));
+        $oneWeekFromEventDate = date('Y-m-d', strtotime($eventDate . '- 1 week'));
 
         $newEntry = new Entry();
         $updatePool = $this->pool;
@@ -299,7 +290,7 @@ class PoolController extends Controller
             }
         }
 
-        return [
+        return $this->render('IntractoSecretSantaBundle:Pool:manage', [
             'addEntryForm' => $addEntryForm->createView(),
             'updatePoolDetailsForm' => $updatePoolDetailsForm->createView(),
             'pool' => $this->pool,
@@ -308,13 +299,9 @@ class PoolController extends Controller
             'expose_pool_csrf_token' => $this->get('security.csrf.token_manager')->getToken('expose_pool'),
             'expose_pool_wishlists_csrf_token' => $this->get('security.csrf.token_manager')->getToken('expose_wishlists'),
             'delete_participant_csrf_token' => $this->get('security.csrf.token_manager')->getToken('delete_participant'),
-        ];
+        ]);
     }
 
-    /**
-     * @Route("/delete/{listUrl}", name="pool_delete")
-     * @Template()
-     */
     public function deleteAction(Request $request, $listUrl)
     {
         $correctCsrfToken = $this->isCsrfTokenValid(
@@ -336,12 +323,9 @@ class PoolController extends Controller
 
         $this->get('doctrine.orm.entity_manager')->remove($this->pool);
         $this->get('doctrine.orm.entity_manager')->flush();
+        return $this->render('IntractoSecretSantaBundle:Pool:delete');
     }
 
-    /**
-     * @Route("/expose/{listUrl}", name="pool_expose")
-     * @Template()
-     */
     public function exposeAction(Request $request, $listUrl)
     {
         $correctCsrfToken = $this->isCsrfTokenValid(
@@ -376,10 +360,6 @@ class PoolController extends Controller
         return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
     }
 
-    /**
-     * @Route("/expose_wishlists/{listUrl}", name="pool_expose_wishlists")
-     * @Template()
-     */
     public function exposeWishlistsAction(Request $request, $listUrl)
     {
         $correctCsrfToken = $this->isCsrfTokenValid(
@@ -411,10 +391,6 @@ class PoolController extends Controller
         return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
     }
 
-    /**
-     * @Route("/resend/{listUrl}/{entryId}", name="pool_resend")
-     * @Template("IntractoSecretSantaBundle:Pool:manage.html.twig")
-     */
     public function resendAction($listUrl, $entryId)
     {
         $entry = $this->get('entry_repository')->find($entryId);
@@ -437,10 +413,6 @@ class PoolController extends Controller
         return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
     }
 
-    /**
-     * @Route("/forgot-link", name="pool_forgot_manage_link")
-     * @Template("IntractoSecretSantaBundle:Pool:forgotLink.html.twig")
-     */
     public function forgotLinkAction(Request $request)
     {
         $form = $this->createForm(new ForgotLinkType());
@@ -464,15 +436,11 @@ class PoolController extends Controller
             }
         }
 
-        return [
+        return $this->render("IntractoSecretSantaBundle:Pool:forgotLink.html.twig", [
             'form' => $form->createView(),
-        ];
+        ]);
     }
 
-    /**
-     * @Route("/pool-update/{listUrl}", name="pool_update")
-     * @Template()
-     */
     public function sendPoolUpdateAction($listUrl)
     {
         $results = $this->get('intracto_secret_santa.entry')->fetchDataForPoolUpdateMail($listUrl);
@@ -490,11 +458,10 @@ class PoolController extends Controller
 
     /**
      * @Route("/download-csv-template", name="download_csv_template")
-     * @Template()
      */
     public function downloadCSVTemplateAction()
     {
-        $path = $this->get('kernel')->getRootDir().'/../src/Intracto/SecretSantaBundle/Resources/public/downloads/templateCSVSecretSantaOrganizer.csv';
+        $path = $this->get('kernel')->getRootDir() . '/../src/Intracto/SecretSantaBundle/Resources/public/downloads/templateCSVSecretSantaOrganizer.csv';
         $content = file_get_contents($path);
 
         $response = new Response();

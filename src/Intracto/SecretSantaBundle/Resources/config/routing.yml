@@ -31,3 +31,51 @@ intracto.secretsanta.report.report:
     defaults:
         _controller: IntractoSecretSantaBundle:Report:report
         year: "all"
+
+intracto.secretsanta.pool.create:
+    path: /
+    defaults: { _controller: IntractoSecretSantaBundle:Pool:create}
+
+intracto.secretsanta.pool.reuse:
+    path: /exclude/{listUrl}
+    defaults: { _controller: IntractoSecretSantaBundle:Pool:reuse}
+
+intracto.secretsanta.pool.exclude:
+    path: /exclude/{listUrl}
+    defaults: { _controller: IntractoSecretSantaBundle:Pool:exclude}
+
+intracto.secretsanta.pool.created:
+    path: /created/{listUrl}
+    defaults: { _controller: IntractoSecretSantaBundle:Pool:created}
+
+intracto.secretsanta.pool.manage:
+    path: /manage/{listUrl}
+    defaults: { _controller: IntractoSecretSantaBundle:Pool:manage}
+
+intracto.secretsanta.pool.delete:
+    path: /delete/{listUrl}
+    defaults: { _controller: IntractoSecretSantaBundle:Pool:delete}
+
+intracto.secretsanta.pool.expose:
+    path: /expose/{listUrl}
+    defaults: { _controller: IntractoSecretSantaBundle:Pool:expose}
+
+intracto.secretsanta.pool.wishlist:
+    path: /expose_wishlists/{listUrl}
+    defaults: { _controller: IntractoSecretSantaBundle:Pool:exposeWishlists}
+
+intracto.secretsanta.pool.resend:
+    path: /resend/{listUrl}/{entryId}
+    defaults: { _controller: IntractoSecretSantaBundle:Pool:resend}
+
+intracto.secretsanta.pool.forgot_manage_link:
+    path: /forgot-link
+    defaults: { _controller: IntractoSecretSantaBundle:Pool:forgotLink}
+
+intracto.secretsanta.pool.update:
+    path: /pool-update/{listUrl}
+    defaults: { _controller: IntractoSecretSantaBundle:Pool:sendPoolUpdate}
+
+intracto.secretsanta.pool.download_csv:
+    path: /download-csv-template
+    defaults: { _controller: IntractoSecretSantaBundle:Pool:downloadCSVTemplate}
