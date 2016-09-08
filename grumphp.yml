@@ -26,7 +26,9 @@ parameters:
         phpcs:
             standard: ./vendor/escapestudios/symfony2-coding-standard/Symfony2/
         phpcsfixer:
+            config: sf23
             level: symfony
+            verbose: false
         securitychecker:
             lockfile: ./composer.lock
             run_always: false
