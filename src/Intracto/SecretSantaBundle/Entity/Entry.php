@@ -10,7 +10,7 @@ use Intracto\SecretSantaBundle\Validator\EntryHasValidExcludes;
 /**
  * Intracto\SecretSantaBundle\Entity\Entry.
  *
- * @ORM\Table()
+ * @ORM\Table("Entry")
  * @ORM\Entity(repositoryClass="Intracto\SecretSantaBundle\Entity\EntryRepository")
  * @ORM\HasLifecycleCallbacks()
  *

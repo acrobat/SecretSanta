@@ -158,7 +158,7 @@ class EntryController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
+        return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
 
         return $this->render();
     }
@@ -219,7 +219,7 @@ class EntryController extends Controller
                 $this->translator->trans('flashes.remove_participant.wrong')
             );
 
-            return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
+            return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
         }
 
         $entry = $this->entryRepository->find($entryId);
@@ -233,7 +233,7 @@ class EntryController extends Controller
                 $this->translator->trans('flashes.modify_list.warning')
             );
 
-            return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
+            return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
         }
 
         if (count($pool) <= 3) {
@@ -242,7 +242,7 @@ class EntryController extends Controller
                 $this->translator->trans('flashes.remove_participant.danger')
             );
 
-            return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
+            return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
         }
 
         if ($entry->isPoolAdmin()) {
@@ -251,7 +251,7 @@ class EntryController extends Controller
                 $this->translator->trans('flashes.remove_participant.warning')
             );
 
-            return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
+            return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
         }
 
         $excludeCount = 0;
@@ -268,7 +268,7 @@ class EntryController extends Controller
                 $this->translator->trans('flashes.remove_participant.excluded_entries')
             );
 
-            return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
+            return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
         }
 
         $secretSanta = $entry->getEntry();
@@ -289,7 +289,7 @@ class EntryController extends Controller
             $this->translator->trans('flashes.remove_participant.success')
         );
 
-        return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
+        return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
 
         return $this->render();
     }

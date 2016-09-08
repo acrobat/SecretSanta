@@ -14,6 +14,7 @@ use Intracto\SecretSantaBundle\Form\UpdatePoolDetailsType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -34,7 +35,16 @@ class PoolController extends Controller
     public function createAction(Request $request)
     {
         $pool = new Pool();
-        return $this->render('IntractoSecretSantaBundle:Pool:create.html.twig', $this->handlePoolCreation($request, $pool));
+
+        $data = $this->handlePoolCreation($request, $pool);
+        if ($data instanceof RedirectResponse) {
+            return $data;
+        }
+
+        return $this->render(
+            'IntractoSecretSantaBundle:Pool:create.html.twig',
+            $data
+        );
     }
 
     /**
@@ -74,7 +84,7 @@ class PoolController extends Controller
                 $this->get('doctrine.orm.entity_manager')->persist($pool);
                 $this->get('doctrine.orm.entity_manager')->flush();
 
-                return $this->redirect($this->generateUrl('pool_exclude', ['listUrl' => $pool->getListurl()]));
+                return $this->redirect($this->generateUrl('intracto.secretsanta.pool.exclude', ['listUrl' => $pool->getListurl()]));
             }
         }
 
@@ -93,6 +103,12 @@ class PoolController extends Controller
     {
         $this->getPool($listUrl);
         $pool = $this->pool->createNewPoolForReuse();
+
+        $data = $this->handlePoolCreation($request, $pool);
+
+        if ($data instanceof RedirectResponse) {
+            return $data;
+        }
 
         return $this->render("IntractoSecretSantaBundle:Pool:create.html.twig", $this->handlePoolCreation($request, $pool));
     }
@@ -134,7 +150,7 @@ class PoolController extends Controller
                 new PoolEvent($this->pool)
             );
 
-            return $this->redirect($this->generateUrl('pool_created', ['listUrl' => $this->pool->getListurl()]));
+            return $this->redirect($this->generateUrl('intracto.secretsanta.pool.created', ['listUrl' => $this->pool->getListurl()]));
         }
 
         if ($this->pool->getEntries()->count() <= 3) {
@@ -150,7 +166,7 @@ class PoolController extends Controller
                 new PoolEvent($this->pool)
             );
 
-            return $this->redirect($this->generateUrl('pool_created', ['listUrl' => $this->pool->getListurl()]));
+            return $this->redirect($this->generateUrl('intracto.secretsanta.pool.created', ['listUrl' => $this->pool->getListurl()]));
         }
 
         $form = $this->createForm(new PoolExcludeEntryType(), $this->pool);
@@ -169,7 +185,7 @@ class PoolController extends Controller
                     new PoolEvent($this->pool)
                 );
 
-                return $this->redirect($this->generateUrl('pool_created', ['listUrl' => $this->pool->getListurl()]));
+                return $this->redirect($this->generateUrl('intracto.secretsanta.pool.created', ['listUrl' => $this->pool->getListurl()]));
             }
         }
 
@@ -183,7 +199,7 @@ class PoolController extends Controller
     {
         $this->getPool($listUrl);
         if (!$this->pool->getCreated()) {
-            return $this->redirect($this->generateUrl('pool_exclude', ['listUrl' => $this->pool->getListurl()]));
+            return $this->redirect($this->generateUrl('intracto.secretsanta.pool.exclude', ['listUrl' => $this->pool->getListurl()]));
         }
 
         return $this->render('IntractoSecretSantaBundle:Pool:created.html.twig', [
@@ -195,7 +211,7 @@ class PoolController extends Controller
     {
         $this->getPool($listUrl);
         if (!$this->pool->getCreated()) {
-            return $this->redirect($this->generateUrl('pool_exclude', ['listUrl' => $this->pool->getListurl()]));
+            return $this->redirect($this->generateUrl('intracto.secretsanta.pool.exclude', ['listUrl' => $this->pool->getListurl()]));
         }
 
         if ($this->pool->getSentdate() === null) {
@@ -228,7 +244,7 @@ class PoolController extends Controller
                             $this->get('translator')->trans('flashes.modify_list.warning')
                         );
 
-                        return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
+                        return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
                     }
 
                     $newEntry->setUrl(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
@@ -256,7 +272,7 @@ class PoolController extends Controller
                         $this->get('translator')->trans('flashes.add_participant.success')
                     );
 
-                    return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
+                    return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
                 } else {
                     $this->get('session')->getFlashBag()->add(
                         'danger',
@@ -280,7 +296,7 @@ class PoolController extends Controller
                         $this->get('translator')->trans('flashes.updated_party.success')
                     );
 
-                    return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
+                    return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
                 } else {
                     $this->get('session')->getFlashBag()->add(
                         'danger',
@@ -316,7 +332,7 @@ class PoolController extends Controller
                 $this->get('translator')->trans('flashes.delete.not_deleted')
             );
 
-            return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
+            return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
         }
 
         $this->getPool($listUrl);
@@ -357,7 +373,7 @@ class PoolController extends Controller
         /* Mail pool owner the pool matches */
         $this->get('intracto_secret_santa.mail')->sendPoolMatchesToAdmin($this->pool);
 
-        return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
+        return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
     }
 
     public function exposeWishlistsAction(Request $request, $listUrl)
@@ -388,7 +404,7 @@ class PoolController extends Controller
 
         $this->get('intracto_secret_santa.mail')->sendAllWishlistsToAdmin($this->pool);
 
-        return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
+        return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
     }
 
     public function resendAction($listUrl, $entryId)
@@ -410,7 +426,7 @@ class PoolController extends Controller
             $this->get('translator')->trans('flashes.resend.resent', ['%email%' => $entry->getName()])
         );
 
-        return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
+        return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
     }
 
     public function forgotLinkAction(Request $request)
@@ -453,7 +469,7 @@ class PoolController extends Controller
             $this->get('translator')->trans('flashes.pool_update.success')
         );
 
-        return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $this->pool->getListurl()]));
+        return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $this->pool->getListurl()]));
     }
 
     /**

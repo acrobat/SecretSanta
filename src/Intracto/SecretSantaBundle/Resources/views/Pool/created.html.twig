@@ -12,6 +12,6 @@
         <div><strong>{{ 'created.warning'|trans }}</strong> {{ 'created.check_spam'|trans }}</div>
     </div>
 
-    {% if app.environment == 'dev' %}<a href="{{ path('pool_manage', { 'listUrl': pool.listUrl }) }}">{{ path('pool_manage', { 'listUrl': pool.listUrl }) }}</a>{% endif %}
+    {% if app.environment == 'dev' %}<a href="{{ path('intracto.secretsanta.pool.manage', { 'listUrl': pool.listUrl }) }}">{{ path('intracto.secretsanta.pool.manage', { 'listUrl': pool.listUrl }) }}</a>{% endif %}
 </div>
 {% endblock %}

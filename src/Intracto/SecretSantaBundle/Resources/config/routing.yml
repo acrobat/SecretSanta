@@ -37,7 +37,7 @@ intracto.secretsanta.pool.create:
     defaults: { _controller: IntractoSecretSantaBundle:Pool:create}
 
 intracto.secretsanta.pool.reuse:
-    path: /exclude/{listUrl}
+    path: /reuse/{listUrl}
     defaults: { _controller: IntractoSecretSantaBundle:Pool:reuse}
 
 intracto.secretsanta.pool.exclude:

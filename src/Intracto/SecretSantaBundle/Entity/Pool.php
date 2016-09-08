@@ -10,7 +10,7 @@ use Intracto\SecretSantaBundle\Validator\PoolHasValidExcludes;
 /**
  * Intracto\SecretSantaBundle\Entity\Pool.
  *
- * @ORM\Table()
+ * @ORM\Table("Pool")
  * @ORM\Entity(repositoryClass="Intracto\SecretSantaBundle\Entity\PoolRepository")
  * @ORM\HasLifecycleCallbacks
  *
