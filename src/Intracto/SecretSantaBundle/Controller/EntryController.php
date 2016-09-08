@@ -62,7 +62,7 @@ class EntryController extends Controller
 
                 foreach ($newWishlistItems as $item) {
                     $item->setEntry($entry);
-                    $this->em->persist($item);
+                    $this->getDoctrine()->getManager()->persist($item);
                     // keep track of rank
                     if ($item->getRank() < $lastRank) {
                         $inOrder = false;
@@ -73,7 +73,7 @@ class EntryController extends Controller
                 // remove entries not passed
                 foreach ($currentWishlistItems as $item) {
                     if (!$newWishlistItems->contains($item)) {
-                        $this->em->remove($item);
+                        $this->getDoctrine()->getManager()->remove($item);
                     }
                 }
 
@@ -82,13 +82,13 @@ class EntryController extends Controller
                 $entry->setWishlistUpdated(true);
                 $entry->setWishlistUpdatedTime($timeNow);
 
-                $this->em->persist($entry);
-                $this->em->flush();
+                $this->getDoctrine()->getManager()->persist($entry);
+                $this->getDoctrine()->getManager()->flush();
 
                 if (!$request->isXmlHttpRequest()) {
                     $this->get('session')->getFlashBag()->add(
                         'success',
-                        $this->translator->trans('flashes.entry.wishlist_updated')
+                        $this->get('translator')->trans('flashes.entry.wishlist_updated')
                     );
 
                     if (!$inOrder) {
@@ -103,9 +103,7 @@ class EntryController extends Controller
                 }
 
                 if ($request->isXmlHttpRequest()) {
-                    $return = ['responseCode' => 200, 'message' => 'Added!'];
-
-                    return new JsonResponse($return);
+                    return new JsonResponse(['responseCode' => 200, 'message' => 'Added!']);
                 }
             }
         }
@@ -134,33 +132,34 @@ class EntryController extends Controller
     public function editEmailAction(Request $request, $listUrl, $entryId)
     {
         /** @var Entry $entry */
-        $entry = $this->entryRepository->find($entryId);
+        $entry = $this->getDoctrine()->getRepository('IntractoSecretSantaBundle:Entry')->find($entryId);
+        if (!$entry instanceof Entry) {
+            throw new NotFoundHttpException();
+        }
 
         if ($entry->getPool()->getListurl() === $listUrl) {
             $emailAddress = new EmailAddress($request->request->get('email'));
-            $emailAddressErrors = $this->validator->validate($emailAddress);
+            $emailAddressErrors = $this->get('validator')->validate($emailAddress);
 
             if (count($emailAddressErrors) > 0) {
                 $this->get('session')->getFlashBag()->add(
                     'error',
-                    $this->translator->trans('flashes.entry.edit_email')
+                    $this->get('translator')->trans('flashes.entry.edit_email')
                 );
             } else {
                 $entry->setEmail((string) $emailAddress);
-                $this->em->flush($entry);
+                $this->getDoctrine()->getManager()->flush($entry);
 
-                $this->mailerService->sendSecretSantaMailForEntry($entry);
+                $this->get('intracto_secret_santa.mail')->sendSecretSantaMailForEntry($entry);
 
                 $this->get('session')->getFlashBag()->add(
                     'success',
-                    $this->translator->trans('flashes.entry.saved_email')
+                    $this->get('translator')->trans('flashes.entry.saved_email')
                 );
             }
         }
 
-        return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
-
-        return $this->render();
+        return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
     }
 
     /**
@@ -171,9 +170,9 @@ class EntryController extends Controller
         $startCrawling = new \DateTime();
         $startCrawling->sub(new \DateInterval('P4M'));
 
-        return ['entries' => $this->entryRepository->findAfter($startCrawling)];
-
-        return $this->render();
+        return $this->render('IntractoSecretSantaBundle:Entry:dumpEntries.html.twig', [
+            'entries' => $this->getDoctrine()->getRepository('IntractoSecretSantaBundle:Entry')->findAfter($startCrawling),
+        ]);
     }
 
     /**
@@ -184,18 +183,20 @@ class EntryController extends Controller
      */
     public function pokeBuddyAction($url, $entryId)
     {
-        $entry = $this->entryRepository->find($entryId);
+        /** @var Entry $entry */
+        $entry = $this->getDoctrine()->getRepository('IntractoSecretSantaBundle:Entry')->find($entryId);
+        if (!$entry instanceof Entry) {
+            throw new NotFoundHttpException();
+        }
 
-        $this->mailerService->sendPokeMailToBuddy($entry);
+        $this->get('intracto_secret_santa.mail')->sendPokeMailToBuddy($entry);
 
         $this->get('session')->getFlashBag()->add(
             'success',
-            $this->translator->trans('flashes.entry.poke_buddy')
+            $this->get('translator')->trans('flashes.entry.poke_buddy')
         );
 
         return $this->redirect($this->generateUrl('intracto.secretsanta.entry.index', ['url' => $url]));
-
-        return $this->render();
     }
 
     /**
@@ -212,17 +213,22 @@ class EntryController extends Controller
             $request->get('csrf_token')
         );
 
-        $correctConfirmation = ($request->get('confirmation') === $this->translator->trans('remove_participant.phrase_to_type'));
+        /** @var Entry $entry */
+        $entry = $this->getDoctrine()->getRepository('IntractoSecretSantaBundle:Entry')->find($entryId);
+        if (!$entry instanceof Entry) {
+            throw new NotFoundHttpException();
+        }
+
+        $correctConfirmation = ($request->get('confirmation') === $this->get('translator')->trans('remove_participant.phrase_to_type'));
         if ($correctConfirmation === false || $correctCsrfToken === false) {
             $this->get('session')->getFlashBag()->add(
                 'danger',
-                $this->translator->trans('flashes.remove_participant.wrong')
+                $this->get('translator')->trans('flashes.remove_participant.wrong')
             );
 
             return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
         }
 
-        $entry = $this->entryRepository->find($entryId);
         $pool = $entry->getPool()->getEntries();
 
         $eventDate = date_format($entry->getPool()->getEventdate(), 'Y-m-d');
@@ -230,7 +236,7 @@ class EntryController extends Controller
         if (date('Y-m-d') > $oneWeekFromEventDate) {
             $this->get('session')->getFlashBag()->add(
                 'warning',
-                $this->translator->trans('flashes.modify_list.warning')
+                $this->get('translator')->trans('flashes.modify_list.warning')
             );
 
             return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
@@ -239,7 +245,7 @@ class EntryController extends Controller
         if (count($pool) <= 3) {
             $this->get('session')->getFlashBag()->add(
                 'danger',
-                $this->translator->trans('flashes.remove_participant.danger')
+                $this->get('translator')->trans('flashes.remove_participant.danger')
             );
 
             return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
@@ -248,7 +254,7 @@ class EntryController extends Controller
         if ($entry->isPoolAdmin()) {
             $this->get('session')->getFlashBag()->add(
                 'warning',
-                $this->translator->trans('flashes.remove_participant.warning')
+                $this->get('translator')->trans('flashes.remove_participant.warning')
             );
 
             return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
@@ -265,32 +271,31 @@ class EntryController extends Controller
         if ($excludeCount > 0) {
             $this->get('session')->getFlashBag()->add(
                 'warning',
-                $this->translator->trans('flashes.remove_participant.excluded_entries')
+                $this->get('translator')->trans('flashes.remove_participant.excluded_entries')
             );
 
             return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
         }
 
         $secretSanta = $entry->getEntry();
-        $buddyId = $this->entryQuery->findBuddyByEntryId($entryId);
-        $buddy = $this->entryRepository->find($buddyId[0]['id']);
 
-        $this->em->remove($entry);
-        $this->em->flush();
+        $buddyId = $this->get('intracto_secret_santa.entry')->findBuddyByEntryId($entryId);
+        $buddy = $this->getDoctrine()->getRepository('IntractoSecretSantaBundle:Entry')->find($buddyId[0]['id']);
+
+        $this->getDoctrine()->getManager()->remove($entry);
+        $this->getDoctrine()->getManager()->flush();
 
         $buddy->setEntry($secretSanta);
-        $this->em->persist($buddy);
-        $this->em->flush();
+        $this->getDoctrine()->getManager()->persist($buddy);
+        $this->getDoctrine()->getManager()->flush();
 
-        $this->mailerService->sendRemovedSecretSantaMail($buddy);
+        $this->get('intracto_secret_santa.mail')->sendRemovedSecretSantaMail($buddy);
 
         $this->get('session')->getFlashBag()->add(
             'success',
-            $this->translator->trans('flashes.remove_participant.success')
+            $this->get('translator')->trans('flashes.remove_participant.success')
         );
 
-        return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
-
-        return $this->render();
+        return $this->redirect($this->generateUrl('pool_manage', ['listUrl' => $listUrl]));
     }
 }
