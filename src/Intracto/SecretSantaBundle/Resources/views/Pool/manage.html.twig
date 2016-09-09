@@ -41,7 +41,7 @@
                              rel="tooltip" title="{{ 'manage.edit_email'|trans }}" alt="{{ 'manage.edit_email'|trans }}"
                              style="cursor: pointer;">
                         {% spaceless %}
-                            <a href="{{ path('pool_resend', { 'listUrl': pool.listUrl, 'entryId': entry.id }) }}">
+                            <a href="{{ path('intracto.secretsanta.pool.resend', { 'listUrl': pool.listUrl, 'entryId': entry.id }) }}">
                                 <img src="{{ asset('bundles/intractosecretsanta/img/envelope.png') }}" rel="tooltip"
                                      title="{{ 'manage.resend_email'|trans }}" alt="{{ 'manage.resend_email'|trans }}">
                             </a>
@@ -76,7 +76,7 @@
         <button id="btn_expose_wishlists" class="btn btn-warning manage_btn"><i
                     class="fa fa-eye"></i> {{ 'btn.expose_wishlists'|trans }}</button>
         <a class="btn btn-info manage_btn manage_btn_link"
-           href="{{ path('pool_update', { 'listUrl': pool.listurl }) }}"><i
+           href="{{ path('intracto.secretsanta.pool.update', { 'listUrl': pool.listurl }) }}"><i
                     class="fa fa-envelope"></i> {{ 'btn.pool_update'|trans|raw }}</a>
         <button id="btn_add" class="btn btn-success manage_btn manage_btn_middle"
                 {% if (form_errors(addEntryForm.name)) or (form_errors(addEntryForm.email)) or 'now'|date('Y-m-d') > oneWeekFromEventDate %}disabled{% endif %}><i
@@ -92,7 +92,7 @@
             {% set phraseToType = 'delete.phrase_to_type'|trans %}
             {{ 'delete.body'|trans({ '%phrase_to_type%': phraseToType})|raw }}
             <br>
-            <form action="{{ path('pool_delete', { 'listUrl': pool.listUrl }) }}" method="post">
+            <form action="{{ path('intracto.secretsanta.pool.delete', { 'listUrl': pool.listUrl }) }}" method="post">
                 <input type="hidden" name="csrf_token" value="{{ delete_pool_csrf_token }}">
                 <input type="text" name="confirmation" id="delete-confirmation" autocomplete="off"
                        onkeyup="if ($(this).val() == '{{ phraseToType }}') $('#btn_delete_confirmation').removeAttr('disabled');"
@@ -112,7 +112,7 @@
             {% set phraseToType = 'expose.phrase_to_type'|trans %}
             {{ 'expose.body'|trans({ '%phrase_to_type%': phraseToType})|raw }}
             <br>
-            <form action="{{ path('pool_expose', { 'listUrl': pool.listUrl }) }}" method="post">
+            <form action="{{ path('intracto.secretsanta.pool.expose', { 'listUrl': pool.listUrl }) }}" method="post">
                 <input type="hidden" name="csrf_token" value="{{ expose_pool_csrf_token }}">
                 <input type="text" name="confirmation" id="expose-confirmation" autocomplete="off"
                        onkeyup="if ($(this).val() == '{{ phraseToType }}') $('#btn_expose_confirmation').removeAttr('disabled');"
@@ -132,7 +132,7 @@
             {% set phraseToType = 'expose_wishlists.phrase_to_type'|trans %}
             {{ 'expose_wishlists.body'|trans({ '%phrase_to_type%': phraseToType})|raw }}
             <br>
-            <form action="{{ path('pool_expose_wishlists', { 'listUrl':pool.listUrl }) }}" method="post">
+            <form action="{{ path('intracto.secretsanta.pool.expose', { 'listUrl':pool.listUrl }) }}" method="post">
                 <input type="hidden" name="csrf_token" value="{{ expose_pool_wishlists_csrf_token }}">
                 <input type="text" name="confirmation" id="expose-wishlists-confirmation" autocomplete="off"
                        onkeyup="if ($(this).val() == '{{ phraseToType }}') $('#btn_expose_wishlists_confirmation').removeAttr('disabled');"
@@ -329,7 +329,7 @@
         }
 
         function attachAction(listUrl, entryId) {
-            var url = '{{ path('entry_remove', {'listUrl': 'listUrl', 'entryId': 'entryId'}) }}';
+            var url = '{{ path('intracto.secretsanta.entry.remove_entry_from_pool', {'listUrl': 'listUrl', 'entryId': 'entryId'}) }}';
             url = url.replace('listUrl', listUrl);
             url = url.replace('entryId', entryId);
             $('#delete-participant-form').attr('action', url);

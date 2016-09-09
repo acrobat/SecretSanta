@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * WishlistItem.
  *
- * @ORM\Table()
+ * @ORM\Table("WishlistItem")
  * @ORM\Entity
  */
 class WishlistItem

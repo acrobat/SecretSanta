@@ -306,7 +306,7 @@ class PoolController extends Controller
             }
         }
 
-        return $this->render('IntractoSecretSantaBundle:Pool:manage', [
+        return $this->render('IntractoSecretSantaBundle:Pool:manage.html.twig', [
             'addEntryForm' => $addEntryForm->createView(),
             'updatePoolDetailsForm' => $updatePoolDetailsForm->createView(),
             'pool' => $this->pool,
