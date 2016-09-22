@@ -28,7 +28,7 @@ parameters:
         phpcsfixer:
             config: sf23
             level: symfony
-            verbose: false
+            verbose: true
         securitychecker:
             lockfile: ./composer.lock
             run_always: false
