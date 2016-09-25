@@ -2,11 +2,6 @@
 
 #cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/files/behat-travis.yml" ./behat.yml
 
-# Run phpunit tests (Temporary re-enable xdebug to generate coverage report)
-phpenv config-add ~/xdebug.ini
-phpunit -c app/phpunit.xml.dist --coverage-text || exit $?
-phpenv config-rm xdebug.ini
-
 # Configure display
 /sbin/start-stop-daemon --start --quiet --pidfile /tmp/xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1680x1050x16
 export DISPLAY=:99
@@ -22,6 +17,11 @@ fi
 # Run Selenium with ChromeDriver
 echo "Start selenium"
 bin/selenium-server-standalone -Dwebdriver.chrome.driver=$BUILD_CACHE_DIR/chromedriver > $TRAVIS_BUILD_DIR/selenium.log 2>&1 &
+
+# Run phpunit tests (Temporary re-enable xdebug to generate coverage report)
+phpenv config-add ~/xdebug.ini
+phpunit -c app/phpunit.xml.dist --coverage-text || exit $?
+phpenv config-rm xdebug.ini
 
 # Run webserver
 app/console server:run 127.0.0.1:8080 --env=test_travis --router=app/config/router_test_travis.php --no-debug > $TRAVIS_BUILD_DIR/webserver.log 2>&1 &
