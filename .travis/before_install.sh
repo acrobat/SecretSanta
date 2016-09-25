@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+cp /home/travis/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ~/xdebug.ini
 phpenv config-rm xdebug.ini || exit $? # Disable XDebug
 mkdir -p \"${BUILD_CACHE_DIR}\" || exit $? # Create build cache directory
 
