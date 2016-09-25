@@ -9,6 +9,8 @@ default:
         secretsanta:
             type: symfony_bundle
             bundle: IntractoSecretSantaBundle
+            contexts:
+                   - Intracto\SecretSantaBundle\Features\Context\Bootstrap\PoolContext
 
     extensions:
         Behat\MinkExtension:
@@ -46,3 +48,8 @@ default:
             screenshot: true
 
         FriendsOfBehat\PerformanceExtension: ~
+
+        SensioLabs\Behat\PageObjectExtension:
+          namespaces:
+            page:
+              - Intracto\SecretSantaBundle\Behat\Page

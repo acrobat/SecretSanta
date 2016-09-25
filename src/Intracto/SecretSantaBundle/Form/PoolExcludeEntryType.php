@@ -30,6 +30,9 @@ class PoolExcludeEntryType extends AbstractType
                 'data_class' => Pool::class,
                 'validation_groups' => ['exclude_entries'],
                 'cascade_validation' => true,
+                'attr' => [
+                    'id' => 'pool_exclude',
+                ],
             ]
         );
     }

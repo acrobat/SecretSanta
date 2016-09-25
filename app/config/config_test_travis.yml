@@ -4,6 +4,7 @@ imports:
 parameters:
     database_user: root
     database_password: ''
+    database_host: '192.168.33.50'
 
 framework:
     test: ~

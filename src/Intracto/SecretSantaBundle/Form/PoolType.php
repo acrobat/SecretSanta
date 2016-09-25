@@ -62,6 +62,7 @@ class PoolType extends AbstractType
                 'action' => '#mysanta',
                 'attr' => [
                     'novalidate' => 'novalidate',
+                    'id' => 'pool_form'
                 ],
             ]
         );

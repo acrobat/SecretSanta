@@ -35,7 +35,9 @@
         "behat/symfony2-extension": "~2.0",
         "se/selenium-server-standalone": "^2.52",
         "friends-of-behat/performance-extension": "^1.0",
-        "lakion/mink-debug-extension": "^1.0.3"
+        "lakion/mink-debug-extension": "^1.0.3",
+        "sensiolabs/behat-page-object-extension": "^2.0",
+        "webmozart/assert": "^1.0"
     },
     "scripts": {
         "travis-build": [
@@ -67,7 +69,7 @@
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
-        "symfony-assets-install": "symlink",
+        "symfony-assets-install": "hard",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         },
