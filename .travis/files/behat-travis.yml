@@ -1,4 +1,4 @@
-imports: ["behat.yml.dist"]
+imports: ["behat.yml"]
 
 default:
     extensions:
