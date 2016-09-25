@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/files/behat-travis.yml" ./behat.yml
+#cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/files/behat-travis.yml" ./behat.yml
 
  # Configure display
 /sbin/start-stop-daemon --start --quiet --pidfile /tmp/xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1680x1050x16
@@ -15,6 +15,7 @@ if [ ! -f $BUILD_CACHE_DIR/chromedriver ]; then
 fi
 
 # Run Selenium with ChromeDriver
+echo "Start selenium"
 bin/selenium-server-standalone -Dwebdriver.chrome.driver=$BUILD_CACHE_DIR/chromedriver > $TRAVIS_BUILD_DIR/selenium.log 2>&1 &
 
 # Run webserver
