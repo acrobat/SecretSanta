@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-# Run phpunit tests (Temporary re-enable xdebug to generate coverage report)
-phpenv config-add ~/xdebug.ini
-phpunit -c app/phpunit.xml.dist --coverage-text || exit $?
-phpenv config-rm xdebug.ini
-
 #cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/files/behat-travis.yml" ./behat.yml
 
 # Configure display
@@ -23,13 +18,13 @@ fi
 echo "Start selenium"
 bin/selenium-server-standalone -Dwebdriver.chrome.driver=$BUILD_CACHE_DIR/chromedriver > $TRAVIS_BUILD_DIR/selenium.log 2>&1 &
 
-bin/wait-for-port 9515 # Chromedriver port
-bin/wait-for-port 4444 # Selenium2 port
+# Run phpunit tests (Temporary re-enable xdebug to generate coverage report)
+phpenv config-add ~/xdebug.ini
+phpunit -c app/phpunit.xml.dist --coverage-text || exit $?
+phpenv config-rm xdebug.ini
 
 # Run webserver
 app/console server:run 127.0.0.1:8080 --env=test_travis --router=app/config/router_test_travis.php --no-debug > $TRAVIS_BUILD_DIR/webserver.log 2>&1 &
-
-bin/wait-for-port 8080 # Webserver port
 
 # Run behat tests
 bin/behat --strict -f progress || exit $?
