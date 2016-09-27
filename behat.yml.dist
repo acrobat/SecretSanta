@@ -14,7 +14,7 @@ default:
 
     extensions:
         Behat\MinkExtension:
-            base_url: "http://localhost:8080/"
+            base_url: 'http://dev.secretsantaorganizer.com/app_test.php'
             default_session: symfony
             javascript_session: chrome
             sessions:
@@ -26,26 +26,21 @@ default:
                         capabilities:
                             browserName: chrome
                             browser: chrome
-                            version: ""
+                            version: ''
                             chrome:
                                 switches:
-                                    - "start-fullscreen"
-                                    - "start-maximized"
-                                    - "no-sandbox"
+                                    - 'start-fullscreen'
+                                    - 'start-maximized'
+                                    - 'no-sandbox'
                 firefox:
                     selenium2:
                         browser: firefox
             show_auto: false
 
-        Behat\Symfony2Extension:
-            kernel:
-                env: test_travis
-                debug: false
-
         Lakion\Behat\MinkDebugExtension:
             directory: .travis/build
             clean_start: false
-            screenshot: true
+            screenshot: false
 
         FriendsOfBehat\PerformanceExtension: ~
 
