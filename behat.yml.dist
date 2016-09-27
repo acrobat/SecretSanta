@@ -37,6 +37,11 @@ default:
                         browser: firefox
             show_auto: false
 
+        Behat\Symfony2Extension:
+            kernel:
+                env: test_travis
+                debug: false
+
         Lakion\Behat\MinkDebugExtension:
             directory: .travis/build
             clean_start: false
