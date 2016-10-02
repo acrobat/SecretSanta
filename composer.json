@@ -60,10 +60,7 @@
         ]
     },
     "config": {
-        "bin-dir": "bin",
-        "platform": {
-            "php": "5.6"
-        }
+        "bin-dir": "bin"
     },
     "minimum-stability": "stable",
     "extra": {
