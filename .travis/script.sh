@@ -6,6 +6,8 @@ cp "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/files/behat-travis.yml" ./beha
 /sbin/start-stop-daemon --start --quiet --pidfile /tmp/xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1680x1050x16
 export DISPLAY=:99
 
+chromium-browser --version
+
 # Download and configure ChromeDriver
 if [ ! -f $BUILD_CACHE_DIR/chromedriver ]; then
     # Using ChromeDriver 2.12 which supports Chrome 36-40, we're using Chromium 37
