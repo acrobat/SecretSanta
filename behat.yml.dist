@@ -14,7 +14,7 @@ default:
 
     extensions:
         Behat\MinkExtension:
-            base_url: 'http://dev.secretsantaorganizer.com/app_test.php'
+            base_url: 'http://dev.secretsantaorganizer.com/'
             default_session: symfony
             javascript_session: chrome
             sessions:
