@@ -1,9 +1,9 @@
 <?php
 
-namespace Intracto\SecretSantaBundle\Entity;
+namespace Intracto\Domain\Entry\Service;
 
 use Doctrine\ORM\EntityManager;
-use JMS\DiExtraBundle\Annotation as DI;
+use Intracto\SecretSantaBundle\Entity\Pool;
 
 class EntryService
 {
@@ -13,15 +13,15 @@ class EntryService
     public $em;
 
     /**
-     * @var EntryShuffler
+     * @var Shuffler
      */
     public $entryShuffler;
 
     /**
      * @param EntityManager $em
-     * @param EntryShuffler $entryShuffler
+     * @param Shuffler $entryShuffler
      */
-    public function __construct(EntityManager $em, EntryShuffler $entryShuffler)
+    public function __construct(EntityManager $em, Shuffler $entryShuffler)
     {
         $this->em = $em;
         $this->entryShuffler = $entryShuffler;

@@ -11,7 +11,7 @@ use Intracto\SecretSantaBundle\Validator\EntryHasValidExcludes;
  * Intracto\SecretSantaBundle\Entity\Entry.
  *
  * @ORM\Table("Entry")
- * @ORM\Entity(repositoryClass="Intracto\SecretSantaBundle\Entity\EntryRepository")
+ * @ORM\Entity(repositoryClass="Intracto\Domain\Entry\EntryRepository")
  * @ORM\HasLifecycleCallbacks()
  *
  * @EntryHasValidExcludes(groups={"exclude_entries"})
