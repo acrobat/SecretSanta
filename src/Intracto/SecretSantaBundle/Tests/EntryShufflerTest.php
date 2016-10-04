@@ -3,7 +3,7 @@
 namespace Intracto\SecretSantaBundle\Tests;
 
 use Intracto\SecretSantaBundle\Entity\Entry;
-use Intracto\SecretSantaBundle\Entity\EntryShuffler;
+use Intracto\Domain\Entry\Service\Shuffler;
 use Intracto\SecretSantaBundle\Entity\Pool;
 
 class EntryShufflerTest extends \PHPUnit_Framework_TestCase
@@ -37,7 +37,7 @@ class EntryShufflerTest extends \PHPUnit_Framework_TestCase
         $entry4->addExcludedEntry($entry1);
         $entry4->addExcludedEntry($entry2);
 
-        $entryShuffler = new EntryShuffler();
+        $entryShuffler = new Shuffler();
         for ($i = 0; $i < 1000; ++$i) {
             $shuffeledEntries = $entryShuffler->shuffleEntries($pool);
 
@@ -470,7 +470,7 @@ class EntryShufflerTest extends \PHPUnit_Framework_TestCase
         $fam0entry9->addExcludedEntry($fam8entry9);
         $fam0entry9->addExcludedEntry($fam9entry9);
 
-        $entryShuffler = new EntryShuffler();
+        $entryShuffler = new Shuffler();
         for ($i = 0; $i < 1000; ++$i) {
             $shuffeledEntries = $entryShuffler->shuffleEntries($pool);
 
@@ -1713,7 +1713,7 @@ class EntryShufflerTest extends \PHPUnit_Framework_TestCase
         $fam9entry9->addExcludedEntry($fam9entry7);
         $fam9entry9->addExcludedEntry($fam9entry8);
 
-        $entryShuffler = new EntryShuffler();
+        $entryShuffler = new Shuffler();
         for ($i = 0; $i < 10; ++$i) {
             $shuffeledEntries = $entryShuffler->shuffleEntries($pool);
 
@@ -1751,7 +1751,7 @@ class EntryShufflerTest extends \PHPUnit_Framework_TestCase
         $entry1->addExcludedEntry($entry2);
         $entry1->addExcludedEntry($entry3);
 
-        $entryShuffler = new EntryShuffler();
+        $entryShuffler = new Shuffler();
         $shuffeledEntries = $entryShuffler->shuffleEntries($pool);
         $this->assertFalse($shuffeledEntries);
     }
@@ -1779,7 +1779,7 @@ class EntryShufflerTest extends \PHPUnit_Framework_TestCase
         $entry1->addExcludedEntry($entry2);
         $entry2->addExcludedEntry($entry1);
 
-        $entryShuffler = new EntryShuffler();
+        $entryShuffler = new Shuffler();
         $shuffeledEntries = $entryShuffler->shuffleEntries($pool);
         $this->assertFalse($shuffeledEntries);
     }
@@ -2074,7 +2074,7 @@ class EntryShufflerTest extends \PHPUnit_Framework_TestCase
         $fam1entry9->addExcludedEntry($fam0entry8);
         $fam1entry9->addExcludedEntry($fam0entry9);
 
-        $entryShuffler = new EntryShuffler();
+        $entryShuffler = new Shuffler();
         for ($i = 0; $i < 10; ++$i) {
             $shuffeledEntries = $entryShuffler->shuffleEntries($pool);
 
