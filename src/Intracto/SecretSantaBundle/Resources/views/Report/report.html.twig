@@ -266,7 +266,7 @@
         <script type="text/javascript">
             $(document).ready(function(){
                 $('#select-season').on('change', function() {
-                    var url = '{{ path("report", { 'year' : "CHOICE" }) }}';
+                    var url = '{{ path("intracto.secretsanta.report.report", { 'year' : "CHOICE" }) }}';
                     window.location = url.replace('CHOICE', $(this).val());
                 });
 

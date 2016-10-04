@@ -3,6 +3,7 @@
 namespace Intracto\SecretSantaBundle\Query;
 
 use Doctrine\DBAL\Connection;
+use Intracto\Domain\Entry\Query\EntryReportQuery;
 
 class WishlistReportQuery
 {

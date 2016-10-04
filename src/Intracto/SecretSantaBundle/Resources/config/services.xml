@@ -15,7 +15,7 @@
             <argument type="service" id="database_connection"></argument>
             <argument type="service" id="intracto_secret_santa.featured_years"></argument>
         </service>
-        <service id="intracto_secret_santa.entry" class="Intracto\SecretSantaBundle\Query\EntryReportQuery">
+        <service id="intracto_secret_santa.entry" class="Intracto\Domain\Entry\Query\EntryReportQuery">
             <argument type="service" id="database_connection"></argument>
             <argument type="service" id="intracto_secret_santa.pool"></argument>
             <argument type="service" id="intracto_secret_santa.featured_years"></argument>
@@ -48,7 +48,7 @@
             <argument type="service" id="router"></argument>
             <argument>%admin_email%</argument>
         </service>
-        <service id="intracto_secret_santa.entry_mail" class="Intracto\SecretSantaBundle\Query\EntryMailQuery">
+        <service id="intracto_secret_santa.entry_mail" class="Intracto\Domain\Entry\Query\EntryMailQuery">
             <argument type="service" id="doctrine.orm.entity_manager"></argument>
         </service>
         <service id="intracto_secret_santa.pool_mail" class="Intracto\SecretSantaBundle\Query\PoolMailQuery">

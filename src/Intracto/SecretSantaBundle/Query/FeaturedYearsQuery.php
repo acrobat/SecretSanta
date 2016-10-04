@@ -27,7 +27,7 @@ class FeaturedYearsQuery
     {
         $query = $this->dbal->createQueryBuilder()
             ->select('distinct(year(p.sentdate)) AS featured_year')
-            ->from('pool', 'p')
+            ->from('Pool', 'p')
             ->where('year(p.sentdate) IS NOT NULL')
             ->orderBy('year(p.sentdate)', 'DESC');
 
