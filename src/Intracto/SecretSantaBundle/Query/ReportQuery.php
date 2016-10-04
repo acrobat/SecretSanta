@@ -2,6 +2,8 @@
 
 namespace Intracto\SecretSantaBundle\Query;
 
+use Intracto\Domain\Entry\Query\EntryReportQuery;
+
 class ReportQuery
 {
     /** @var PoolReportQuery */

@@ -1,8 +1,12 @@
 <?php
 
-namespace Intracto\SecretSantaBundle\Query;
+namespace Intracto\Domain\Entry\Query;
 
 use Doctrine\DBAL\Connection;
+use Intracto\SecretSantaBundle\Query\FeaturedYearsQuery;
+use Intracto\SecretSantaBundle\Query\NoResultException;
+use Intracto\SecretSantaBundle\Query\PoolReportQuery;
+use Intracto\SecretSantaBundle\Query\Season;
 
 class EntryReportQuery
 {
