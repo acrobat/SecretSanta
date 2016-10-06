@@ -34,7 +34,7 @@ class EntryMailQuery
 
         $query = $this->em->createQuery('
             SELECT entry
-            FROM IntractoSecretSantaBundle:Entry entry
+            FROM GfxDomain:Entry\Model\Entry entry
               JOIN entry.pool pool
             WHERE entry.wishlist_updated = 0
               AND pool.created = 1
@@ -70,7 +70,7 @@ class EntryMailQuery
 
         $query = $this->em->createQuery('
             SELECT entry
-            FROM IntractoSecretSantaBundle:Entry entry
+            FROM GfxDomain:Entry\Model\Entry entry
               JOIN entry.pool pool
             WHERE entry.viewdate IS NULL
               AND pool.created = 1
@@ -101,7 +101,7 @@ class EntryMailQuery
 
         $query = $this->em->createQuery('
             SELECT entry
-            FROM IntractoSecretSantaBundle:Entry entry
+            FROM GfxDomain:Entry\Model\Entry entry
               JOIN entry.pool pool
               JOIN entry.entry peer
             WHERE peer.wishlist_updated = 1
@@ -134,7 +134,7 @@ class EntryMailQuery
 
         $query = $this->em->createQuery('
             SELECT entry
-            FROM IntractoSecretSantaBundle:Entry entry
+            FROM GfxDomain:Entry\Model\Entry entry
               JOIN entry.pool pool
             WHERE entry.poolAdmin = 1
               AND entry.url IS NOT NULL

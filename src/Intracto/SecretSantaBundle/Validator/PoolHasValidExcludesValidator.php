@@ -3,7 +3,7 @@
 namespace Intracto\SecretSantaBundle\Validator;
 
 use Intracto\Domain\Entry\Service\Shuffler;
-use Intracto\SecretSantaBundle\Entity\Pool;
+use Intracto\Domain\Pool\Model\Pool;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 

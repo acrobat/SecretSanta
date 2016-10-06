@@ -2,8 +2,8 @@
 
 namespace Intracto\SecretSantaBundle\Event;
 
+use Intracto\Domain\Pool\Model\Pool;
 use Symfony\Component\EventDispatcher\Event;
-use Intracto\SecretSantaBundle\Entity\Pool;
 
 class PoolEvent extends Event
 {

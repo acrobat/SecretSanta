@@ -104,17 +104,15 @@ services:
 
     pool_repository:
         class: Doctrine\ORM\EntityRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
-            - IntractoSecretSantaBundle:Pool
+            - GfxDomain:Pool\Model\Pool
 
     entry_repository:
         class: Doctrine\ORM\EntityRepository
-        factory_service: doctrine.orm.entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
-            - IntractoSecretSantaBundle:Entry
+            - GfxDomain:Entry\Model\Entry
 
     intracto_secretsanta.send_pending_confirmation_mail_listener:
         class: Intracto\SecretSantaBundle\EventListener\SendPendingConfirmationMailListener

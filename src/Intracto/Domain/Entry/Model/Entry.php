@@ -4,8 +4,8 @@ namespace Intracto\Domain\Entry\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Intracto\SecretSantaBundle\Entity\Pool;
-use Intracto\SecretSantaBundle\Entity\WishlistItem;
+use Intracto\Domain\Pool\Model\Pool;
+use Intracto\Domain\Wishlist\Model\WishlistItem;
 use Symfony\Component\Validator\Constraints as Assert;
 use Intracto\SecretSantaBundle\Validator\EntryHasValidExcludes;
 
@@ -32,7 +32,7 @@ class Entry
     /**
      * @var Pool
      *
-     * @ORM\ManyToOne(targetEntity="Intracto\SecretSantaBundle\Entity\Pool", inversedBy="entries")
+     * @ORM\ManyToOne(targetEntity="Intracto\Domain\Pool\Model\Pool", inversedBy="entries")
      * @ORM\JoinColumn(name="poolId", referencedColumnName="id", onDelete="CASCADE")
      */
     private $pool;
@@ -110,7 +110,7 @@ class Entry
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Intracto\SecretSantaBundle\Entity\WishlistItem", mappedBy="entry", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Intracto\Domain\Wishlist\Model\WishlistItem", mappedBy="entry", cascade={"persist", "remove"})
      * @ORM\OrderBy({"rank" = "asc"})
      */
     private $wishlistItems;

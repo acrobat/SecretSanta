@@ -2,7 +2,7 @@
 
 namespace Intracto\Domain\Entry\Service;
 
-use Intracto\SecretSantaBundle\Entity\Pool;
+use Intracto\Domain\Pool\Model\Pool;
 
 /**
  * Class Shuffler.

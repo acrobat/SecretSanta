@@ -51,10 +51,10 @@
         <service id="intracto_secret_santa.entry_mail" class="Intracto\Domain\Entry\Query\EntryMailQuery">
             <argument type="service" id="doctrine.orm.entity_manager"></argument>
         </service>
-        <service id="intracto_secret_santa.pool_mail" class="Intracto\SecretSantaBundle\Query\PoolMailQuery">
+        <service id="intracto_secret_santa.pool_mail" class="Intracto\Domain\Pool\Query\PoolMailQuery">
             <argument type="service" id="doctrine.orm.entity_manager"></argument>
         </service>
-        <service id="intracto_secret_santa.wishlist_mail" class="Intracto\SecretSantaBundle\Query\WishlistMailQuery">
+        <service id="intracto_secret_santa.wishlist_mail" class="Intracto\Domain\Wishlist\Query\WishlistMailQuery">
             <argument type="service" id="database_connection"></argument>
         </service>
         <service id="intracto_secret_santa.entry_service" class="Intracto\Domain\Entry\Service\EntryService">

@@ -4,7 +4,7 @@ namespace Intracto\Domain\Entry\Tests;
 
 use Intracto\Domain\Entry\Model\Entry;
 use Intracto\Domain\Entry\Service\Shuffler;
-use Intracto\SecretSantaBundle\Entity\Pool;
+use Intracto\Domain\Pool\Model\Pool;
 
 class EntryShufflerTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Intracto\SecretSantaBundle\Query;
+namespace Intracto\Domain\Wishlist\Query;
 
 use Doctrine\DBAL\Connection;
 use Intracto\Domain\Entry\Model\Entry;

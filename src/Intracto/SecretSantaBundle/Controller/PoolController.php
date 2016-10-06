@@ -2,13 +2,13 @@
 
 namespace Intracto\SecretSantaBundle\Controller;
 
+use Intracto\Domain\Pool\Model\Pool;
 use Intracto\SecretSantaBundle\Event\PoolEvent;
 use Intracto\SecretSantaBundle\Event\PoolEvents;
 use Intracto\SecretSantaBundle\Form\AddEntryType;
 use Intracto\SecretSantaBundle\Form\ForgotLinkType;
 use Intracto\SecretSantaBundle\Form\PoolExcludeEntryType;
 use Intracto\SecretSantaBundle\Form\PoolType;
-use Intracto\SecretSantaBundle\Entity\Pool;
 use Intracto\Domain\Entry\Model\Entry;
 use Intracto\SecretSantaBundle\Form\UpdatePoolDetailsType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
