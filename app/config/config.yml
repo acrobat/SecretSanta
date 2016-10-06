@@ -139,6 +139,3 @@ services:
 
     intracto_secret_santa.entry_shuffler:
         class: Intracto\Domain\Entry\Service\Shuffler
-
-    intracto_secret_santa.service.export:
-        class: Intracto\SecretSantaBundle\Service\ExportService
