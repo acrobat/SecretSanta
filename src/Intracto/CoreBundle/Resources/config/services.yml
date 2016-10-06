@@ -1,0 +1,26 @@
+services:
+    intracto_core.send_pending_confirmation_mail_listener:
+        class: Intracto\CoreBundle\Event\Listener\SendPendingConfirmationMailListener
+        arguments:
+            - "@templating"
+            - "@mailer"
+            - "%admin_email%"
+            - "@translator"
+        tags:
+            - { name: kernel.event_subscriber }
+
+    intracto_core.validator.entry_has_valid_excludes:
+        class: Intracto\CoreBundle\Validator\EntryHasValidExcludesValidator
+        tags:
+            - { name: validator.constraint_validator, alias: intracto_core.validator.entry_has_valid_excludes }
+
+    intracto_core.validator.pool_has_valid_excludes:
+        class: Intracto\CoreBundle\Validator\PoolHasValidExcludesValidator
+        arguments:
+            - "@entry.service.shuffler"
+        tags:
+            - { name: validator.constraint_validator, alias: intracto_core.validator.pool_has_valid_excludes }
+
+    intracto_core.service.mail_service:
+        class: Intracto\CoreBundle\Service\MailerService
+        arguments: ['@mailer', '@doctrine.orm.entity_manager', '@templating', '@translator', '@router', '%admin_email%']

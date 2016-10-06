@@ -3,8 +3,8 @@
 namespace Intracto\SecretSantaBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Intracto\Domain\Participant\Model\EmailAddress;
 use Intracto\Domain\Wishlist\Model\WishlistItem;
-use Intracto\SecretSantaBundle\Entity\EmailAddress;
 use Intracto\Domain\Entry\Model\Entry;
 use Intracto\SecretSantaBundle\Form\WishlistNewType;
 use Intracto\SecretSantaBundle\Form\WishlistType;
@@ -155,7 +155,7 @@ class EntryController extends Controller
                 $entry->setEmail((string) $emailAddress);
                 $this->getDoctrine()->getManager()->flush($entry);
 
-                $this->get('intracto_secret_santa.mail')->sendSecretSantaMailForEntry($entry);
+                $this->get('intracto_core.service.mail_service')->sendSecretSantaMailForEntry($entry);
 
                 $this->get('session')->getFlashBag()->add(
                     'success',
@@ -194,7 +194,7 @@ class EntryController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $this->get('intracto_secret_santa.mail')->sendPokeMailToBuddy($entry);
+        $this->get('intracto_core.service.mail_service')->sendPokeMailToBuddy($entry);
 
         $this->get('session')->getFlashBag()->add(
             'success',
@@ -294,7 +294,7 @@ class EntryController extends Controller
         $this->getDoctrine()->getManager()->persist($buddy);
         $this->getDoctrine()->getManager()->flush();
 
-        $this->get('intracto_secret_santa.mail')->sendRemovedSecretSantaMail($buddy);
+        $this->get('intracto_core.service.mail_service')->sendRemovedSecretSantaMail($buddy);
 
         $this->get('session')->getFlashBag()->add(
             'success',

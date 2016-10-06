@@ -102,28 +102,3 @@ services:
 
     cache:
         class: "Doctrine\Common\Cache\ApcCache"
-
-    intracto_secretsanta.send_pending_confirmation_mail_listener:
-        class: Intracto\SecretSantaBundle\EventListener\SendPendingConfirmationMailListener
-        arguments:
-            - "@templating"
-            - "@mailer"
-            - "%admin_email%"
-            - "@translator"
-        tags:
-            - { name: kernel.event_subscriber }
-
-    intracto.validator.entry_has_valid_excludes:
-        class: Intracto\SecretSantaBundle\Validator\EntryHasValidExcludesValidator
-        tags:
-            - { name: validator.constraint_validator, alias: intracto.validator.entry_has_valid_excludes }
-    intracto.validator.pool_has_valid_excludes:
-        class: Intracto\SecretSantaBundle\Validator\PoolHasValidExcludesValidator
-        arguments:
-            - "@entry.service.shuffler"
-        tags:
-            - { name: validator.constraint_validator, alias: intracto.validator.pool_has_valid_excludes }
-
-    intracto_secret_santa.mail:
-        class: Intracto\SecretSantaBundle\Mailer\MailerService
-        arguments: ['@mailer', '@doctrine.orm.entity_manager', '@templating', '@translator', '@router', '%admin_email%']

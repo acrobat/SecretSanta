@@ -16,10 +16,10 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Intracto\SecretSantaBundle\IntractoSecretSantaBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
-            new Intracto\GiftExchangeBundle\IntractoGiftExchangeBundle(),
+            new Intracto\CoreBundle\IntractoCoreBundle(),
+            new Intracto\SecretSantaBundle\IntractoSecretSantaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
