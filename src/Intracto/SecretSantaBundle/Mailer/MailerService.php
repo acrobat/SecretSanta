@@ -7,7 +7,7 @@ use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Intracto\Domain\Entry\Model\Entry;
-use Intracto\SecretSantaBundle\Entity\Pool;
+use Intracto\Domain\Pool\Model\Pool;
 
 class MailerService
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Intracto\SecretSantaBundle\Query;
+namespace Intracto\Domain\Pool\Query;
 
 use Doctrine\ORM\EntityManager;
 

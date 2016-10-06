@@ -18,7 +18,7 @@ class EntryRepository extends EntityRepository
     {
         $query = $this->_em->createQuery('
             SELECT entry
-            FROM IntractoSecretSantaBundle:Entry entry
+            FROM GfxDomain:Entry\Model\Entry entry
             JOIN entry.pool pool
             JOIN entry.entry peer
             WHERE pool.sentdate >= :startDate

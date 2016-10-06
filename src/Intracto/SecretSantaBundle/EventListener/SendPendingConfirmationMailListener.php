@@ -2,7 +2,7 @@
 
 namespace Intracto\SecretSantaBundle\EventListener;
 
-use Intracto\SecretSantaBundle\Entity\Pool;
+use Intracto\Domain\Pool\Model\Pool;
 use Intracto\SecretSantaBundle\Event\PoolEvent;
 use Intracto\SecretSantaBundle\Event\PoolEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

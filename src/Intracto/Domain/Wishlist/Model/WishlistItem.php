@@ -1,6 +1,6 @@
 <?php
 
-namespace Intracto\SecretSantaBundle\Entity;
+namespace Intracto\Domain\Wishlist\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 

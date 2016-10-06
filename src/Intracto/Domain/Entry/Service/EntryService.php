@@ -3,7 +3,7 @@
 namespace Intracto\Domain\Entry\Service;
 
 use Doctrine\ORM\EntityManager;
-use Intracto\SecretSantaBundle\Entity\Pool;
+use Intracto\Domain\Pool\Model\Pool;
 
 class EntryService
 {

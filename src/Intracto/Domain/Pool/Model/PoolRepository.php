@@ -1,6 +1,6 @@
 <?php
 
-namespace Intracto\SecretSantaBundle\Entity;
+namespace Intracto\Domain\Pool\Model;
 
 use Doctrine\ORM\EntityRepository;
 

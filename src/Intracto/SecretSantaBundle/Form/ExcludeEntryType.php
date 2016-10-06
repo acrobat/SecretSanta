@@ -21,7 +21,7 @@ class ExcludeEntryType extends AbstractType
             $form = $event->getForm();
 
             $form->add('excluded_entries', EntityType::class, [
-                'class' => 'IntractoSecretSantaBundle:Entry',
+                'class' => 'GfxDomain:Entry\Model\Entry',
                 'multiple' => true,
                 'expanded' => false,
                 'choice_label' => 'name',
