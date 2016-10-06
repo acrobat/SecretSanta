@@ -1,9 +1,9 @@
 <?php
 
-namespace Intracto\SecretSantaBundle\Query;
+namespace Intracto\Domain\Analytics\Query;
 
 use Doctrine\DBAL\Connection;
-use Proxies\__CG__\Intracto\SecretSantaBundle\Entity\Pool;
+use Intracto\Domain\Common\Season;
 
 class IpReportQuery
 {

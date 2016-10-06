@@ -1,9 +1,12 @@
 <?php
 
-namespace Intracto\SecretSantaBundle\Query;
+namespace Intracto\Domain\Analytics\Query;
 
 use Google_Client;
 use Google_Service_Analytics;
+use Intracto\Domain\Analytics\GaParameters;
+use Intracto\Domain\Common\Languages;
+use Intracto\Domain\Common\Season;
 
 class GoogleAnalyticsQuery
 {

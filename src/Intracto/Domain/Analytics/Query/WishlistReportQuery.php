@@ -1,8 +1,10 @@
 <?php
 
-namespace Intracto\SecretSantaBundle\Query;
+namespace Intracto\Domain\Analytics\Query;
 
 use Doctrine\DBAL\Connection;
+use Intracto\Domain\Analytics\Exception\NoResultException;
+use Intracto\Domain\Common\Season;
 use Intracto\Domain\Entry\Query\EntryReportQuery;
 
 class WishlistReportQuery

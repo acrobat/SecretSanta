@@ -3,10 +3,10 @@
 namespace Intracto\Domain\Entry\Query;
 
 use Doctrine\DBAL\Connection;
-use Intracto\SecretSantaBundle\Query\FeaturedYearsQuery;
-use Intracto\SecretSantaBundle\Query\NoResultException;
-use Intracto\SecretSantaBundle\Query\PoolReportQuery;
-use Intracto\SecretSantaBundle\Query\Season;
+use Intracto\Domain\Analytics\Exception\NoResultException;
+use Intracto\Domain\Analytics\Query\FeaturedYearsQuery;
+use Intracto\Domain\Analytics\Query\PoolReportQuery;
+use Intracto\Domain\Common\Season;
 
 class EntryReportQuery
 {
