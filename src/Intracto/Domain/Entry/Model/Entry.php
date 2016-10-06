@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Intracto\Domain\Pool\Model\Pool;
 use Intracto\Domain\Wishlist\Model\WishlistItem;
 use Symfony\Component\Validator\Constraints as Assert;
-use Intracto\SecretSantaBundle\Validator\EntryHasValidExcludes;
+use Intracto\CoreBundle\Validator\EntryHasValidExcludes;
 
 /**
  * Intracto\Domain\Entry\Model\Entry.

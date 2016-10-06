@@ -2,9 +2,9 @@
 
 namespace Intracto\SecretSantaBundle\Controller;
 
+use Intracto\CoreBundle\Event\PoolEvent;
+use Intracto\CoreBundle\Event\PoolEvents;
 use Intracto\Domain\Pool\Model\Pool;
-use Intracto\SecretSantaBundle\Event\PoolEvent;
-use Intracto\SecretSantaBundle\Event\PoolEvents;
 use Intracto\SecretSantaBundle\Form\AddEntryType;
 use Intracto\SecretSantaBundle\Form\ForgotLinkType;
 use Intracto\SecretSantaBundle\Form\PoolExcludeEntryType;
@@ -220,7 +220,7 @@ class PoolController extends Controller
                 $this->get('translator')->trans('flashes.manage.email_validated')
             );
 
-            $this->get('intracto_secret_santa.mail')->sendSecretSantaMailsForPool($this->pool);
+            $this->get('intracto_core.service.mail_service')->sendSecretSantaMailsForPool($this->pool);
         }
 
         $eventDate = date_format($this->pool->getEventdate(), 'Y-m-d');
@@ -265,7 +265,7 @@ class PoolController extends Controller
                     $this->get('doctrine.orm.entity_manager')->persist($newEntry);
                     $this->get('doctrine.orm.entity_manager')->flush();
 
-                    $this->get('intracto_secret_santa.mail')->sendSecretSantaMailForEntry($newEntry);
+                    $this->get('intracto_core.service.mail_service')->sendSecretSantaMailForEntry($newEntry);
 
                     $this->get('session')->getFlashBag()->add(
                         'success',
@@ -372,7 +372,7 @@ class PoolController extends Controller
         $this->get('doctrine.orm.entity_manager')->flush();
 
         /* Mail pool owner the pool matches */
-        $this->get('intracto_secret_santa.mail')->sendPoolMatchesToAdmin($this->pool);
+        $this->get('intracto_core.service.mail_service')->sendPoolMatchesToAdmin($this->pool);
 
         return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
     }
@@ -403,7 +403,7 @@ class PoolController extends Controller
 
         $this->get('doctrine.orm.entity_manager')->flush();
 
-        $this->get('intracto_secret_santa.mail')->sendAllWishlistsToAdmin($this->pool);
+        $this->get('intracto_core.service.mail_service')->sendAllWishlistsToAdmin($this->pool);
 
         return $this->redirect($this->generateUrl('intracto.secretsanta.pool.manage', ['listUrl' => $listUrl]));
     }
@@ -420,7 +420,7 @@ class PoolController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $this->get('intracto_secret_santa.mail')->sendSecretSantaMailForEntry($entry);
+        $this->get('intracto_core.service.mail_service')->sendSecretSantaMailForEntry($entry);
 
         $this->get('session')->getFlashBag()->add(
             'success',
@@ -437,7 +437,7 @@ class PoolController extends Controller
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             if ($form->isValid()) {
-                if ($this->get('intracto_secret_santa.mail')->sendForgotManageLinkMail($form->getData()['email'])) {
+                if ($this->get('intracto_core.service.mail_service')->sendForgotManageLinkMail($form->getData()['email'])) {
                     $feedback = [
                         'type' => 'success',
                         'message' => $this->get('translator')->trans('flashes.forgot_manage_link.success'),
@@ -463,7 +463,7 @@ class PoolController extends Controller
         $results = $this->get('entry.query.entry_report_query')->fetchDataForPoolUpdateMail($listUrl);
         $this->getPool($listUrl);
 
-        $this->get('intracto_secret_santa.mail')->sendPoolUpdateMailForPool($this->pool, $results);
+        $this->get('intracto_core.service.mail_service')->sendPoolUpdateMailForPool($this->pool, $results);
 
         $this->get('session')->getFlashBag()->add(
             'success',

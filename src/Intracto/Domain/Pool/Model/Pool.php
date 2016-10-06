@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Intracto\Domain\Entry\Model\Entry;
 use Symfony\Component\Validator\Constraints as Assert;
-use Intracto\SecretSantaBundle\Validator\PoolHasValidExcludes;
+use Intracto\CoreBundle\Validator\PoolHasValidExcludes;
 
 /**
  * Intracto\Domain\Pool\Model\Pool.
