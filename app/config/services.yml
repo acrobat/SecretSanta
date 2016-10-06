@@ -1,0 +1,61 @@
+services:
+    #Domain\Pool
+    pool.model.pool_mail_query:
+        class: Intracto\Domain\Pool\Query\PoolMailQuery
+        arguments: ['@doctrine.orm.entity_manager']
+
+    pool.model.pool_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+            - GfxDomain:Pool\Model\Pool
+
+    #Domain\Entry
+    entry.service.entry_service:
+        class: Intracto\Domain\Entry\Service\EntryService
+        arguments: ['@doctrine.orm.entity_manager', '@entry.service.shuffler']
+
+    entry.service.shuffler:
+        class: Intracto\Domain\Entry\Service\Shuffler
+
+    entry.model.entry_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+            - GfxDomain:Entry\Model\Entry
+
+    entry.query.entry_mail_query:
+        class: Intracto\Domain\Entry\Query\EntryMailQuery
+        arguments: ['@doctrine.orm.entity_manager']
+
+    entry.query.entry_report_query:
+        class: Intracto\Domain\Entry\Query\EntryReportQuery
+        arguments: ['@database_connection', '@analytics.query.pool_report_query', '@analytics.query.featured_years_query', '%kernel.root_dir%']
+
+    #Domain\Wishlist
+    wishlist.query.wishlist_mail_query:
+        class: Intracto\Domain\Wishlist\Query\WishlistMailQuery
+        arguments: ['@database_connection']
+
+    #Domain\Analytics
+    analytics.query.report_query:
+        class: Intracto\Domain\Analytics\Query\ReportQuery
+        arguments: ['@analytics.query.pool_report_query', '@entry.query.entry_report_query', '@analytics.query.ip_report_query', '@analytics.query.wishlist_report_query', '@analytics.query.featured_years_query']
+    analytics.query.pool_report_query:
+        class: Intracto\Domain\Analytics\Query\PoolReportQuery
+        arguments: ['@database_connection', '@analytics.query.featured_years_query']
+    analytics.query.ip_report_query:
+        class: Intracto\Domain\Analytics\Query\IpReportQuery
+        arguments: ['@database_connection']
+    analytics.query.wishlist_report_query:
+        class: Intracto\Domain\Analytics\Query\WishlistReportQuery
+        arguments: ['@database_connection', '@entry.query.entry_report_query']
+    analytics.query.featured_years_query:
+        class: Intracto\Domain\Analytics\Query\FeaturedYearsQuery
+        arguments: ['@database_connection']
+    analytics.query.google_analytics_query:
+        class: Intracto\Domain\Analytics\Query\GoogleAnalyticsQuery
+        arguments: ['%ga_view_id%', '%kernel.root_dir%/config/client_secrets.json']
+    analytics.query.season_comparison_report_query:
+        class: Intracto\Domain\Analytics\Query\SeasonComparisonReportQuery
+        arguments: ['@analytics.query.pool_report_query', '@entry.query.entry_report_query', '@analytics.query.wishlist_report_query']

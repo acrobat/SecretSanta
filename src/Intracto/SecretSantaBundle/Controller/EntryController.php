@@ -3,9 +3,9 @@
 namespace Intracto\SecretSantaBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Intracto\Domain\Wishlist\Model\WishlistItem;
 use Intracto\SecretSantaBundle\Entity\EmailAddress;
 use Intracto\Domain\Entry\Model\Entry;
-use Intracto\SecretSantaBundle\Entity\WishlistItem;
 use Intracto\SecretSantaBundle\Form\WishlistNewType;
 use Intracto\SecretSantaBundle\Form\WishlistType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,7 +28,7 @@ class EntryController extends Controller
     public function indexAction(Request $request, $url)
     {
         /** @var Entry $entry */
-        $entry = $this->getDoctrine()->getRepository('GfxDomain:Entry\Model\Entry')->findOneBy(['url' => $url]);
+        $entry = $this->get('entry.model.entry_repository')->findOneBy(['url' => $url]);
         if (!$entry instanceof Entry) {
             throw new NotFoundHttpException();
         }
@@ -137,7 +137,7 @@ class EntryController extends Controller
     public function editEmailAction(Request $request, $listUrl, $entryId)
     {
         /** @var Entry $entry */
-        $entry = $this->getDoctrine()->getRepository('GfxDomain:Entry\Model\Entry')->find($entryId);
+        $entry = $this->get('entry.model.entry_repository')->find($entryId);
         if (!$entry instanceof Entry) {
             throw new NotFoundHttpException();
         }
@@ -176,7 +176,7 @@ class EntryController extends Controller
         $startCrawling->sub(new \DateInterval('P4M'));
 
         return $this->render('IntractoSecretSantaBundle:Entry:dumpEntries.html.twig', [
-            'entries' => $this->getDoctrine()->getRepository('GfxDomain:Entry\Model\Entry')->findAfter($startCrawling),
+            'entries' => $this->get('entry.model.entry_repository')->findAfter($startCrawling),
         ]);
     }
 
@@ -189,7 +189,7 @@ class EntryController extends Controller
     public function pokeBuddyAction($url, $entryId)
     {
         /** @var Entry $entry */
-        $entry = $this->getDoctrine()->getRepository('GfxDomain:Entry\Model\Entry')->find($entryId);
+        $entry = $this->get('entry.model.entry_repository')->find($entryId);
         if (!$entry instanceof Entry) {
             throw new NotFoundHttpException();
         }
@@ -219,7 +219,7 @@ class EntryController extends Controller
         );
 
         /** @var Entry $entry */
-        $entry = $this->getDoctrine()->getRepository('GfxDomain:Entry\Model\Entry')->find($entryId);
+        $entry = $this->get('entry.model.entry_repository')->find($entryId);
         if (!$entry instanceof Entry) {
             throw new NotFoundHttpException();
         }
@@ -284,8 +284,8 @@ class EntryController extends Controller
 
         $secretSanta = $entry->getEntry();
 
-        $buddyId = $this->get('intracto_secret_santa.entry')->findBuddyByEntryId($entryId);
-        $buddy = $this->getDoctrine()->getRepository('GfxDomain:Entry\Model\Entry')->find($buddyId[0]['id']);
+        $buddyId = $this->get('entry.query.entry_report_query')->findBuddyByEntryId($entryId);
+        $buddy = $this->get('entry.model.entry_repository')->find($buddyId[0]['id']);
 
         $this->getDoctrine()->getManager()->remove($entry);
         $this->getDoctrine()->getManager()->flush();

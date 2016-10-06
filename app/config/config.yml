@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: services.yml }
 
 framework:
     #esi:             ~
@@ -102,18 +103,6 @@ services:
     cache:
         class: "Doctrine\Common\Cache\ApcCache"
 
-    pool_repository:
-        class: Doctrine\ORM\EntityRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - GfxDomain:Pool\Model\Pool
-
-    entry_repository:
-        class: Doctrine\ORM\EntityRepository
-        factory: ['@doctrine.orm.entity_manager', getRepository]
-        arguments:
-            - GfxDomain:Entry\Model\Entry
-
     intracto_secretsanta.send_pending_confirmation_mail_listener:
         class: Intracto\SecretSantaBundle\EventListener\SendPendingConfirmationMailListener
         arguments:
@@ -131,9 +120,10 @@ services:
     intracto.validator.pool_has_valid_excludes:
         class: Intracto\SecretSantaBundle\Validator\PoolHasValidExcludesValidator
         arguments:
-            - "@intracto_secret_santa.entry_shuffler"
+            - "@entry.service.shuffler"
         tags:
             - { name: validator.constraint_validator, alias: intracto.validator.pool_has_valid_excludes }
 
-    intracto_secret_santa.entry_shuffler:
-        class: Intracto\Domain\Entry\Service\Shuffler
+    intracto_secret_santa.mail:
+        class: Intracto\SecretSantaBundle\Mailer\MailerService
+        arguments: ['@mailer', '@doctrine.orm.entity_manager', '@templating', '@translator', '@router', '%admin_email%']
