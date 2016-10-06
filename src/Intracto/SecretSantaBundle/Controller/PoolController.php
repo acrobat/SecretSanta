@@ -9,7 +9,7 @@ use Intracto\SecretSantaBundle\Form\ForgotLinkType;
 use Intracto\SecretSantaBundle\Form\PoolExcludeEntryType;
 use Intracto\SecretSantaBundle\Form\PoolType;
 use Intracto\SecretSantaBundle\Entity\Pool;
-use Intracto\SecretSantaBundle\Entity\Entry;
+use Intracto\Domain\Entry\Model\Entry;
 use Intracto\SecretSantaBundle\Form\UpdatePoolDetailsType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -31,7 +31,6 @@ class PoolController extends Controller
      */
     private $entry;
 
-
     public function createAction(Request $request)
     {
         $pool = new Pool();
@@ -49,7 +48,7 @@ class PoolController extends Controller
 
     /**
      * @param Request $request
-     * @param Pool $pool
+     * @param Pool    $pool
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -95,7 +94,7 @@ class PoolController extends Controller
 
     /**
      * @param Request $request
-     * @param string $listUrl
+     * @param string  $listUrl
      *
      * @return Response
      */
@@ -110,7 +109,7 @@ class PoolController extends Controller
             return $data;
         }
 
-        return $this->render("IntractoSecretSantaBundle:Pool:create.html.twig", $this->handlePoolCreation($request, $pool));
+        return $this->render('IntractoSecretSantaBundle:Pool:create.html.twig', $this->handlePoolCreation($request, $pool));
     }
 
     /**
@@ -138,6 +137,7 @@ class PoolController extends Controller
     /**
      * @param Request $request
      * @param $listUrl
+     *
      * @return Response|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function excludeAction(Request $request, $listUrl)
@@ -224,7 +224,7 @@ class PoolController extends Controller
         }
 
         $eventDate = date_format($this->pool->getEventdate(), 'Y-m-d');
-        $oneWeekFromEventDate = date('Y-m-d', strtotime($eventDate . '- 1 week'));
+        $oneWeekFromEventDate = date('Y-m-d', strtotime($eventDate.'- 1 week'));
 
         $newEntry = new Entry();
         $updatePool = $this->pool;
@@ -339,7 +339,8 @@ class PoolController extends Controller
 
         $this->get('doctrine.orm.entity_manager')->remove($this->pool);
         $this->get('doctrine.orm.entity_manager')->flush();
-        return $this->render('IntractoSecretSantaBundle:Pool:delete');
+
+        return $this->render('IntractoSecretSantaBundle:Pool:delete.html.twig');
     }
 
     public function exposeAction(Request $request, $listUrl)
@@ -452,7 +453,7 @@ class PoolController extends Controller
             }
         }
 
-        return $this->render("IntractoSecretSantaBundle:Pool:forgotLink.html.twig", [
+        return $this->render('IntractoSecretSantaBundle:Pool:forgotLink.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -477,7 +478,7 @@ class PoolController extends Controller
      */
     public function downloadCSVTemplateAction()
     {
-        $path = $this->get('kernel')->getRootDir() . '/../src/Intracto/SecretSantaBundle/Resources/public/downloads/templateCSVSecretSantaOrganizer.csv';
+        $path = $this->get('kernel')->getRootDir().'/../src/Intracto/SecretSantaBundle/Resources/public/downloads/templateCSVSecretSantaOrganizer.csv';
         $content = file_get_contents($path);
 
         $response = new Response();

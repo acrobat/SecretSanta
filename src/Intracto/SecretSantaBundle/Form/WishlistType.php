@@ -3,7 +3,7 @@
 namespace Intracto\SecretSantaBundle\Form;
 
 use Genemu\Bundle\FormBundle\Form\Core\Type\TinymceType;
-use Intracto\SecretSantaBundle\Entity\Entry;
+use Intracto\Domain\Entry\Model\Entry;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

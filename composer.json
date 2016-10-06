@@ -65,6 +65,6 @@
         "phpro/grumphp": "^0.9.1",
         "sensiolabs/security-checker": "^3.0",
         "friendsofphp/php-cs-fixer": "^1.12",
-        "escapestudios/symfony2-coding-standard": "^2.9"
+        "phpunit/phpunit": "5.5.*"
     }
 }

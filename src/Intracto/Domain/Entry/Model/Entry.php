@@ -1,17 +1,19 @@
 <?php
 
-namespace Intracto\SecretSantaBundle\Entity;
+namespace Intracto\Domain\Entry\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Intracto\SecretSantaBundle\Entity\Pool;
+use Intracto\SecretSantaBundle\Entity\WishlistItem;
 use Symfony\Component\Validator\Constraints as Assert;
 use Intracto\SecretSantaBundle\Validator\EntryHasValidExcludes;
 
 /**
- * Intracto\SecretSantaBundle\Entity\Entry.
+ * Intracto\Domain\Entry\Model\Entry.
  *
  * @ORM\Table("Entry")
- * @ORM\Entity(repositoryClass="Intracto\Domain\Entry\EntryRepository")
+ * @ORM\Entity(repositoryClass="Intracto\Domain\Entry\Model\EntryRepository")
  * @ORM\HasLifecycleCallbacks()
  *
  * @EntryHasValidExcludes(groups={"exclude_entries"})
@@ -30,7 +32,7 @@ class Entry
     /**
      * @var Pool
      *
-     * @ORM\ManyToOne(targetEntity="Pool", inversedBy="entries")
+     * @ORM\ManyToOne(targetEntity="Intracto\SecretSantaBundle\Entity\Pool", inversedBy="entries")
      * @ORM\JoinColumn(name="poolId", referencedColumnName="id", onDelete="CASCADE")
      */
     private $pool;
@@ -108,7 +110,7 @@ class Entry
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="WishlistItem", mappedBy="entry", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Intracto\SecretSantaBundle\Entity\WishlistItem", mappedBy="entry", cascade={"persist", "remove"})
      * @ORM\OrderBy({"rank" = "asc"})
      */
     private $wishlistItems;
@@ -501,11 +503,11 @@ class Entry
     }
 
     /**
-     * @param \Intracto\SecretSantaBundle\Entity\Entry $excludedEntry
+     * @param Entry $excludedEntry
      *
      * @return Entry
      */
-    public function addExcludedEntry(\Intracto\SecretSantaBundle\Entity\Entry $excludedEntry)
+    public function addExcludedEntry(Entry $excludedEntry)
     {
         $this->excluded_entries[] = $excludedEntry;
 
@@ -513,9 +515,9 @@ class Entry
     }
 
     /**
-     * @param \Intracto\SecretSantaBundle\Entity\Entry $excludedEntry
+     * @param Entry $excludedEntry
      */
-    public function removeExcludedEntrie(\Intracto\SecretSantaBundle\Entity\Entry $excludedEntry)
+    public function removeExcludedEntry(Entry $excludedEntry)
     {
         $this->excluded_entries->removeElement($excludedEntry);
     }

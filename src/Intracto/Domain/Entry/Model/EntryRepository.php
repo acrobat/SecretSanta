@@ -1,9 +1,8 @@
 <?php
 
-namespace Intracto\Domain\Entry;
+namespace Intracto\Domain\Entry\Model;
 
 use Doctrine\ORM\EntityRepository;
-use Intracto\SecretSantaBundle\Entity\Entry;
 
 /**
  * Class EntryRepository.

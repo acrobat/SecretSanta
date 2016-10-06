@@ -2,7 +2,7 @@
 
 namespace Intracto\SecretSantaBundle\Validator;
 
-use Intracto\SecretSantaBundle\Entity\Entry;
+use Intracto\Domain\Entry\Model\Entry;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 

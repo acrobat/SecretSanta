@@ -19,7 +19,7 @@ class EntryService
 
     /**
      * @param EntityManager $em
-     * @param Shuffler $entryShuffler
+     * @param Shuffler      $entryShuffler
      */
     public function __construct(EntityManager $em, Shuffler $entryShuffler)
     {
