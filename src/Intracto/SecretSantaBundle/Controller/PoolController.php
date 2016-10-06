@@ -125,7 +125,7 @@ class PoolController extends Controller
      */
     protected function getPool($listurl)
     {
-        $this->pool = $this->get('pool_repository')->findOneByListurl($listurl);
+        $this->pool = $this->get('pool.model.pool_repository')->findOneByListurl($listurl);
 
         if (!is_object($this->pool)) {
             throw new NotFoundHttpException();
@@ -157,7 +157,7 @@ class PoolController extends Controller
             $this->pool->setCreated(true);
             $this->get('doctrine.orm.entity_manager')->persist($this->pool);
 
-            $this->get('intracto_secret_santa.entry_service')->shuffleEntries($this->pool);
+            $this->get('entry.service.entry_service')->shuffleEntries($this->pool);
 
             $this->get('doctrine.orm.entity_manager')->flush();
 
@@ -176,7 +176,7 @@ class PoolController extends Controller
                 $this->pool->setCreated(true);
                 $this->get('doctrine.orm.entity_manager')->persist($this->pool);
 
-                $this->get('intracto_secret_santa.entry_service')->shuffleEntries($this->pool);
+                $this->get('entry.service.entry_service')->shuffleEntries($this->pool);
 
                 $this->get('doctrine.orm.entity_manager')->flush();
 
@@ -253,8 +253,8 @@ class PoolController extends Controller
                     $this->get('doctrine.orm.entity_manager')->persist($newEntry);
                     $this->get('doctrine.orm.entity_manager')->flush($newEntry);
 
-                    $adminId = $this->get('intracto_secret_santa.entry')->findAdminIdByPoolId($this->pool->getId());
-                    $admin = $this->get('entry_repository')->findOneById($adminId[0]['id']);
+                    $adminId = $this->get('entry.query.entry_report_query')->findAdminIdByPoolId($this->pool->getId());
+                    $admin = $this->get('entry.model.entry_repository')->findOneById($adminId[0]['id']);
                     $adminMatch = $admin->getEntry();
 
                     $admin->setEntry($newEntry);
@@ -410,7 +410,7 @@ class PoolController extends Controller
 
     public function resendAction($listUrl, $entryId)
     {
-        $entry = $this->get('entry_repository')->find($entryId);
+        $entry = $this->get('entry.model.entry_repository')->find($entryId);
 
         if (!is_object($entry)) {
             throw new NotFoundHttpException();
@@ -460,7 +460,7 @@ class PoolController extends Controller
 
     public function sendPoolUpdateAction($listUrl)
     {
-        $results = $this->get('intracto_secret_santa.entry')->fetchDataForPoolUpdateMail($listUrl);
+        $results = $this->get('entry.query.entry_report_query')->fetchDataForPoolUpdateMail($listUrl);
         $this->getPool($listUrl);
 
         $this->get('intracto_secret_santa.mail')->sendPoolUpdateMailForPool($this->pool, $results);

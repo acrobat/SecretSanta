@@ -17,10 +17,10 @@ class ReportController extends Controller
      */
     public function reportAction($year)
     {
-        $analyticsQuery = $this->get('intracto_secret_santa.analytics');
-        $report = $this->get('intracto_secret_santa.report');
-        $comparison = $this->get('intracto_secret_santa.season_comparison');
-        $featuredYears = $this->get('intracto_secret_santa.featured_years')->getFeaturedYears();
+        $analyticsQuery = $this->get('analytics.query.google_analytics_query');
+        $report = $this->get('analytics.query.report_query');
+        $comparison = $this->get('analytics.query.season_comparison_report_query');
+        $featuredYears = $this->get('analytics.query.featured_years_query')->getFeaturedYears();
 
         if ($reportQueryResult = $this->get('cache')->fetch('data'.$year)) {
             $cache = unserialize($reportQueryResult);
