@@ -62,8 +62,8 @@ doctrine:
             gfx_domain:
                 type: annotation
                 alias: GfxDomain
-                prefix: Intracto\GiftExchangeBundle\Domain
-                dir: "%kernel.root_dir%/../src/Intracto/GiftExchangeBundle/Domain"
+                prefix: Intracto\Domain
+                dir: "%kernel.root_dir%/../src/Intracto/Domain"
 
 # Swiftmailer Configuration
 swiftmailer:

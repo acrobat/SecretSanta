@@ -23,8 +23,6 @@ parameters:
                 - /(.+)/
             case_insensitive: true
             multiline: true
-        phpcs:
-            standard: ./vendor/escapestudios/symfony2-coding-standard/Symfony2/
         phpcsfixer:
             config: sf23
             level: symfony

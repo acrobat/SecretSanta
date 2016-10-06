@@ -37,6 +37,6 @@ Xdebug remote debugging is enabled. Configure your PhpStorm so you can step debu
 
 Run the tests with:
 
-    phpunit.phar -c app
+     php bin/phpunit -c app
 
 Note, don't worry if you see the shell provisioning print a lot of red lines. It all works fine.

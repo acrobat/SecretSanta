@@ -3,7 +3,7 @@
 namespace Intracto\Domain\Entry\Query;
 
 use Doctrine\ORM\EntityManager;
-use Intracto\SecretSantaBundle\Entity\Entry;
+use Intracto\Domain\Entry\Model\Entry;
 
 class EntryMailQuery
 {

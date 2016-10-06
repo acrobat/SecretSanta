@@ -3,7 +3,7 @@
 namespace Intracto\SecretSantaBundle\Form;
 
 use Doctrine\ORM\EntityRepository;
-use Intracto\SecretSantaBundle\Entity\Entry;
+use Intracto\Domain\Entry\Model\Entry;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

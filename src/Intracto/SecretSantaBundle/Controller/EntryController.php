@@ -4,7 +4,7 @@ namespace Intracto\SecretSantaBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Intracto\SecretSantaBundle\Entity\EmailAddress;
-use Intracto\SecretSantaBundle\Entity\Entry;
+use Intracto\Domain\Entry\Model\Entry;
 use Intracto\SecretSantaBundle\Entity\WishlistItem;
 use Intracto\SecretSantaBundle\Form\WishlistNewType;
 use Intracto\SecretSantaBundle\Form\WishlistType;

@@ -24,7 +24,7 @@ class WishlistItem
     /**
      * @var Entry
      *
-     * @ORM\ManyToOne(targetEntity="Entry", inversedBy="wishlistItems")
+     * @ORM\ManyToOne(targetEntity="Intracto\Domain\Entry\Model\Entry", inversedBy="wishlistItems")
      */
     private $entry;
 

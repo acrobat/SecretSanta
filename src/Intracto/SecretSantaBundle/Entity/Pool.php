@@ -4,6 +4,7 @@ namespace Intracto\SecretSantaBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Intracto\Domain\Entry\Model\Entry;
 use Symfony\Component\Validator\Constraints as Assert;
 use Intracto\SecretSantaBundle\Validator\PoolHasValidExcludes;
 
@@ -74,7 +75,7 @@ class Pool
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Entry", mappedBy="pool", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Intracto\Domain\Entry\Model\Entry", mappedBy="pool", cascade={"persist", "remove"})
      *
      * @Assert\Valid()
      */
@@ -289,26 +290,6 @@ class Pool
     public function generateListurl()
     {
         $this->listurl = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
-    }
-
-    /**
-     * @param \Intracto\SecretSantaBundle\Entity\Entry $entries
-     *
-     * @return Pool
-     */
-    public function addEntrie(\Intracto\SecretSantaBundle\Entity\Entry $entries)
-    {
-        $this->entries[] = $entries;
-
-        return $this;
-    }
-
-    /**
-     * @param \Intracto\SecretSantaBundle\Entity\Entry $entries
-     */
-    public function removeEntrie(\Intracto\SecretSantaBundle\Entity\Entry $entries)
-    {
-        $this->entries->removeElement($entries);
     }
 
     /**

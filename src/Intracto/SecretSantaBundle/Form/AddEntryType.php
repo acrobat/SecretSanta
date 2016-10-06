@@ -2,7 +2,7 @@
 
 namespace Intracto\SecretSantaBundle\Form;
 
-use Intracto\SecretSantaBundle\Entity\Entry;
+use Intracto\Domain\Entry\Model\Entry;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
