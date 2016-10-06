@@ -33,17 +33,30 @@ class PoolController extends Controller
 
     public function createAction(Request $request)
     {
-        $pool = new Pool();
+        $service  = $this->container->get('intracto_core.context.pool.form.create');
 
-        $data = $this->handlePoolCreation($request, $pool);
-        if ($data instanceof RedirectResponse) {
-            return $data;
+        if (($response = $service->handle($request)) instanceof Response) {
+            return $response;
         }
 
         return $this->render(
             'IntractoSecretSantaBundle:Pool:create.html.twig',
-            $data
+            [
+                'form' => $service->getForm()->createView(),
+            ]
         );
+//
+//        $pool = new Pool();
+//
+//        $data = $this->handlePoolCreation($request, $pool);
+//        if ($data instanceof RedirectResponse) {
+//            return $data;
+//        }
+//
+//        return $this->render(
+//            'IntractoSecretSantaBundle:Pool:create.html.twig',
+//            $data
+//        );
     }
 
     /**

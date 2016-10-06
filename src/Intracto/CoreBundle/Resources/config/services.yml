@@ -24,3 +24,7 @@ services:
     intracto_core.service.mail_service:
         class: Intracto\CoreBundle\Service\MailerService
         arguments: ['@mailer', '@doctrine.orm.entity_manager', '@templating', '@translator', '@router', '%admin_email%']
+
+    intracto_core.context.pool.form.create:
+        class: Intracto\CoreBundle\Context\Pool\Form\CreateHandler
+        arguments: ['@form.factory']
