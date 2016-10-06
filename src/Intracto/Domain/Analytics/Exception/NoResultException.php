@@ -1,6 +1,6 @@
 <?php
 
-namespace Intracto\SecretSantaBundle\Query;
+namespace Intracto\Domain\Analytics\Exception;
 
 class NoResultException extends \LogicException
 {

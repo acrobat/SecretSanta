@@ -1,7 +1,8 @@
 <?php
 
-namespace Intracto\SecretSantaBundle\Query;
+namespace Intracto\Domain\Analytics\Query;
 
+use Intracto\Domain\Common\Season;
 use Intracto\Domain\Entry\Query\EntryReportQuery;
 
 class SeasonComparisonReportQuery
