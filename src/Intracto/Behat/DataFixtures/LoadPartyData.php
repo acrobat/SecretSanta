@@ -30,6 +30,7 @@ class LoadPartyData implements FixtureInterface
         $party->setEventdate($eventDate);
         $party->setLocation('Test');
         $party->setMessage('Test message');
+        $party->setSentdate(new \DateTime('now'));
         $party->setCreated(true);
 
         /** @var Participant[] $participants */
@@ -43,6 +44,7 @@ class LoadPartyData implements FixtureInterface
             $participant->setName('test'.$i);
             $participant->setEmail('test'.$i.'@test.com');
             $participant->setParty($party);
+            $participant->setInvitationSentDate(new \DateTime('now'));
 
             if ($i === 1) {
                 $participant->setUrl(FeatureContext::PARTICIPANT_URL_TOKEN);

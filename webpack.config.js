@@ -26,6 +26,7 @@ Encore
 
     .addEntry('js/secretsanta', './src/Intracto/SecretSantaBundle/Resources/public/js/secretsanta.js')
     .addEntry('js/wishlist', './src/Intracto/SecretSantaBundle/Resources/public/js/wishlist.js')
+    .addEntry('js/report', './src/Intracto/SecretSantaBundle/Resources/public/js/report.js')
 
     .addStyleEntry('css/main', [
         './src/Intracto/SecretSantaBundle/Resources/public/scss/main.scss',

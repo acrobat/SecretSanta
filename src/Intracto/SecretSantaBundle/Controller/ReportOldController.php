@@ -7,10 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class ReportController extends Controller
+class ReportOldController extends Controller
 {
     /**
-     * @Route("/report/{year}", defaults={"year" = "all"}, name="report")
+     * @Route("/report_old/{year}", defaults={"year" = "all"}, name="report")
      * @Template()
      * @Method("GET")
      */
@@ -18,8 +18,8 @@ class ReportController extends Controller
     {
         /** @var \Intracto\SecretSantaBundle\Query\GoogleAnalyticsQuery $googleAnalyticsQuery */
         $googleAnalyticsQuery = $this->get('intracto_secret_santa.query.google_analytics');
-        /** @var \Intracto\SecretSantaBundle\Query\ReportQuery $reportQuery */
-        $reportQuery = $this->get('intracto_secret_santa.query.report');
+        /** @var \Intracto\SecretSantaBundle\Query\ReportOldQuery $reportQuery */
+        $reportQuery = $this->get('intracto_secret_santa.query.report_old');
         /** @var \Intracto\SecretSantaBundle\Query\SeasonComparisonReportQuery $seasonComparisonReportQuery */
         $seasonComparisonReportQuery = $this->get('intracto_secret_santa.query.season_comparison_report');
         /** @var \Intracto\SecretSantaBundle\Query\FeaturedYearsQuery $featuredYearsQuery */
