@@ -3,12 +3,8 @@ app/config/client_secrets.json
 /app/config/parameters.yml
 /build/
 /phpunit.xml
-/var/*
-!/var/cache
-/var/cache/*
+/var/
 !var/cache/.gitkeep
-!/var/logs
-/var/logs/*
 !var/logs/.gitkeep
 !/var/sessions
 /var/sessions/*
@@ -18,7 +14,7 @@ app/config/client_secrets.json
 web/compiled/*
 web/js/*
 web/css/*
-vendor
+/vendor/
 composer.phar
 dumps
 .vagrant
