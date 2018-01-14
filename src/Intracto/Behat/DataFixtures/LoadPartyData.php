@@ -5,9 +5,9 @@ namespace Intracto\Behat\DataFixtures;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Intracto\Behat\Features\Context\FeatureContext;
-use Intracto\SecretSantaBundle\Entity\Participant;
-use Intracto\SecretSantaBundle\Entity\Party;
-use Intracto\SecretSantaBundle\Entity\WishlistItem;
+use App\Entity\Participant;
+use App\Entity\Party;
+use App\Entity\WishlistItem;
 
 class LoadPartyData implements FixtureInterface
 {

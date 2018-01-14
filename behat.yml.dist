@@ -7,25 +7,25 @@ default:
 
     suites:
         secretsanta:
-            paths:    [ "%paths.base%/src/Intracto/Behat/Features" ]
+            paths:    [ "%paths.base%/features" ]
             contexts:
                    - Behat\MinkExtension\Context\MinkContext
-                   - Intracto\Behat\Features\Context\FeatureContext
-                   - Intracto\Behat\Features\Context\EmailContext
-                   - Intracto\Behat\Features\Context\Bootstrap\PartyContext
-                   - Intracto\Behat\Features\Context\Bootstrap\LanguageContext
-                   - Intracto\Behat\Features\Context\Bootstrap\CommonPartyManagementContext
-                   - Intracto\Behat\Features\Context\Bootstrap\ParticipantContext
-                   - Intracto\Behat\Features\Context\Bootstrap\UnstartedPartyManagementContext
-                   - Intracto\Behat\Features\Context\Bootstrap\StartedPartyManagementContext
-                   - Intracto\Behat\Features\Context\Bootstrap\ReportContext
-                   - Intracto\Behat\Features\Context\Bootstrap\ResendPartyInfoContext
-                   - Intracto\Behat\Features\Context\Bootstrap\ReusePartyLinkContext
-                   - Intracto\Behat\Features\Context\Bootstrap\UnsubscribeContext
+                   - features\bootstrap\FeatureContext
+                   - features\bootstrap\EmailContext
+                   - features\bootstrap\PartyContext
+                   - features\bootstrap\LanguageContext
+                   - features\bootstrap\CommonPartyManagementContext
+                   - features\bootstrap\ParticipantContext
+                   - features\bootstrap\UnstartedPartyManagementContext
+                   - features\bootstrap\StartedPartyManagementContext
+                   - features\bootstrap\ReportContext
+                   - features\bootstrap\ResendPartyInfoContext
+                   - features\bootstrap\ReusePartyLinkContext
+                   - features\bootstrap\UnsubscribeContext
 
     extensions:
         Behat\MinkExtension:
-            base_url: 'http://dev.secretsantaorganizer.com/app_test.php/'
+            base_url: 'http://dev.secretsantaorganizer.com/index.php/'
             default_session: symfony
             javascript_session: chrome
             sessions:

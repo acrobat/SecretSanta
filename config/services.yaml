@@ -1,0 +1,89 @@
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: 'en'
+    supported_locales:
+        - en
+        - es
+        - fr
+        - de
+        - nl
+        - pl
+        - pt
+        - ru
+        - zh-Hans
+        - zh-Hant
+        - 'no'
+    locale_names:
+        en: English
+        nl: Nederlands
+        fr: Français
+        pt: Português
+        zh-Hans: 简体中文
+        zh-Hant: 繁體中文
+        pl: Polskie
+        ru: Русский
+        es: Español
+        de: Deutsch
+        no: Norsk
+    router.request_context.host: '%base_url%'
+    # TODO: extract these to .env/parameters file
+    mailer_transport: smtp
+    mailer_host: localhost
+    mailer_port: 25
+    mailer_user: null
+    mailer_password: null
+    mandrill_transport: smtp
+    mandrill_host: localhost
+    mandrill_port: 25
+    mandrill_user: null
+    mandrill_password: null
+    adwords_password: secret
+    noreply_email: no-reply@dev.secretsantaorganizer.com
+    base_url: dev.secretsantaorganizer.com
+    ga_view_id: 'ga:00000000'
+    geo_ip_db_path: '%kernel.root_dir%/../var/GeoLite2-City.mmdb'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+                            # fetching services directly from the container via $container->get() won't work.
+                            # The best practice is to be explicit about your dependencies anyway.
+        bind:
+            $geoIpDbPath: '%geo_ip_db_path%'
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{Entity,Tests,Query/GaParameters.php,Resources,Intracto}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    App\Mailer\MailerService:
+        arguments:
+            $mailer: '@swiftmailer.mailer.mailer'
+            $mandrill: '@swiftmailer.mailer.mandrill'
+            $noreplyEmail: '%noreply_email%'
+
+    App\Query\GoogleAnalyticsQuery:
+        arguments:
+            $viewId: '%ga_view_id%'
+            $clientSecret: '%kernel.root_dir%/config/client_secrets.json'
+
+    App\Form\Extension\DateTypeExtension:
+        tags:
+          - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\DateType }
+
+    Doctrine\Common\Cache\ApcuCache: ~
+    Symfony\Component\Form\FormRendererInterface: '@twig.form.renderer'

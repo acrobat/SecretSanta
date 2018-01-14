@@ -2,7 +2,7 @@
 var Encore = require('@symfony/webpack-encore');
 
 Encore
-    .setOutputPath('web/build/')
+    .setOutputPath('public/build/')
     .setPublicPath('/build')
 
     .cleanupOutputBeforeBuild()
@@ -17,25 +17,25 @@ Encore
         "window.jQuery": "jquery"
     })
 
-    .createSharedEntry('js/vendor', ['jquery', 'bootstrap', './src/Intracto/SecretSantaBundle/Resources/public/js/modernizr.custom.min.js'])
+    .createSharedEntry('js/vendor', ['jquery', 'bootstrap', './assets/js/modernizr.custom.min.js'])
 
-    .addEntry('js/party.create', './src/Intracto/SecretSantaBundle/Resources/public/js/party.create.js')
-    .addEntry('js/party.import', './src/Intracto/SecretSantaBundle/Resources/public/js/party.import.js')
+    .addEntry('js/party.create', './assets/js/party.create.js')
+    .addEntry('js/party.import', './assets/js/party.import.js')
 
-    .addEntry('js/party.manage', './src/Intracto/SecretSantaBundle/Resources/public/js/party.manage.js')
+    .addEntry('js/party.manage', './assets/js/party.manage.js')
 
-    .addEntry('js/secretsanta', './src/Intracto/SecretSantaBundle/Resources/public/js/secretsanta.js')
-    .addEntry('js/wishlist', './src/Intracto/SecretSantaBundle/Resources/public/js/wishlist.js')
+    .addEntry('js/secretsanta', './assets/js/secretsanta.js')
+    .addEntry('js/wishlist', './assets/js/wishlist.js')
 
     .addStyleEntry('css/main', [
-        './src/Intracto/SecretSantaBundle/Resources/public/scss/main.scss',
+        './assets/scss/main.scss',
         'jquery-ui/themes/base/core.css',
         'jquery-ui/themes/base/sortable.css',
     ])
 
-    .addStyleEntry('css/update', './src/Intracto/SecretSantaBundle/Resources/public/css/update.css')
-    .addStyleEntry('css/report', './src/Intracto/SecretSantaBundle/Resources/public/css/report.css')
-    .addStyleEntry('css/mediaqueries', './src/Intracto/SecretSantaBundle/Resources/public/css/mediaqueries.css')
+    .addStyleEntry('css/update', './assets/css/update.css')
+    .addStyleEntry('css/report', './assets/css/report.css')
+    .addStyleEntry('css/mediaqueries', './assets/css/mediaqueries.css')
 
     .enableSourceMaps(!Encore.isProduction())
 ;

@@ -1,0 +1,11 @@
+privacy-policy:
+    path: /privacy
+    defaults:
+        _controller:  FrameworkBundle:Template:template
+        template:     'Static/privacyPolicy.html.twig'
+
+faq:
+    path: /faq
+    defaults:
+        _controller:  FrameworkBundle:Template:template
+        template:     'Static/faq.html.twig'
