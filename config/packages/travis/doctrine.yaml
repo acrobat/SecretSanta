@@ -1,0 +1,10 @@
+doctrine:
+    dbal:
+        dbname: "secretsanta_test"
+    orm:
+        entity_managers:
+            default:
+                metadata_cache_driver:
+                    type: memcached
+                    host: localhost
+                    port: 11211

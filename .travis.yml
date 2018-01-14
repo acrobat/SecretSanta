@@ -7,6 +7,8 @@ env:
     global:
         - BUILD_CACHE_DIR=$HOME/.build-cache
         - TRAVIS_BUILD_DIR=.travis/build
+        - APP_ENV=travis
+        - APP_DEBUG=false
 
 services:
   - mysql
